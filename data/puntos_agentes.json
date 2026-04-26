@@ -10,6 +10,15 @@
                         "FE"
                     ],
                     "puntos": 91
+                },
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CROSS",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 91
                 }
             ]
         }
