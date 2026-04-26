@@ -1,6 +1,7 @@
 # admin/admin_inicio.py
 import streamlit as st
 import pandas as pd
+import json
 from datetime import datetime, timedelta
 from calendar import monthrange
 
@@ -27,7 +28,6 @@ def show_inicio_admin():
     with col_f3:
         periodo_filtro = st.selectbox("Período:", ["Dia especifico", "Dia anterior (L-V)", "Mes actual", "Mes anterior"], key="admin_periodo")
     
-    # Determinar fechas del período
     hoy = datetime.now()
     dias_lab = 1
     año_ant = hoy.year
@@ -56,7 +56,7 @@ def show_inicio_admin():
         dias_lab = sum(1 for d in range(1, hoy.day + 1) if datetime(hoy.year, hoy.month, d).weekday() < 5)
         st.caption(f"📅 {hoy.strftime('%B %Y')}")
     
-    else:  # Mes anterior
+    else:
         if hoy.month == 1:
             mes_ant = 12
             año_ant = hoy.year - 1
@@ -76,7 +76,7 @@ def show_inicio_admin():
     registro = cargar_registro_diario()
     datos_puntos = cargar_datos_puntos()
     
-    # Obtener agentes según filtros
+    # Obtener agentes según filtro de campaña
     if campana_filtro == "TODAS":
         agentes = um.get_all_agents()
     else:
@@ -116,7 +116,6 @@ def show_inicio_admin():
         
         total_horas_equipo += horas_diarias * dias_lab
     
-    # Descontar horas de ausentes
     horas_ausentes = 0
     for agente in agentes:
         username = agente['username']
@@ -136,23 +135,15 @@ def show_inicio_admin():
     st.write("### 📊 Metricas Generales")
     
     col1, col2, col3, col4, col5 = st.columns(5)
-    
-    with col1:
-        st.metric("👥 Agentes", len(agentes))
-    with col2:
-        st.metric("📦 Ventas Totales", total_ventas)
-    with col3:
-        st.metric("📈 SPH Global", sph_global)
-    with col4:
-        st.metric("📞 Llamadas +5m", total_llamadas_5m)
-    with col5:
-        st.metric("📞 Llamadas +15m", total_llamadas_15m)
+    with col1: st.metric("👥 Agentes", len(agentes))
+    with col2: st.metric("📦 Ventas Totales", total_ventas)
+    with col3: st.metric("📈 SPH Global", sph_global)
+    with col4: st.metric("📞 Llamadas +5m", total_llamadas_5m)
+    with col5: st.metric("📞 Llamadas +15m", total_llamadas_15m)
     
     col_a1, col_a2, col_a3 = st.columns(3)
-    with col_a1:
-        st.metric("⏰ Horas Efectivas", f"{horas_efectivas:.1f}h")
-    with col_a2:
-        st.metric("🔴 Ausentes", total_ausentes)
+    with col_a1: st.metric("⏰ Horas Efectivas", f"{horas_efectivas:.1f}h")
+    with col_a2: st.metric("🔴 Ausentes", total_ausentes)
     with col_a3:
         ventas_por_agente = round(total_ventas / len(agentes), 1) if agentes else 0
         st.metric("📦 Media Ventas/Agente", ventas_por_agente)
@@ -163,8 +154,6 @@ def show_inicio_admin():
     st.markdown("---")
     st.write("### 🎯 Objetivos de Ventas del Mes")
     
-    # Cargar config de objetivos
-    import json
     try:
         with open('data/config_puntos_super.json', 'r', encoding='utf-8') as f:
             config_obj = json.load(f)
@@ -172,7 +161,6 @@ def show_inicio_admin():
     except:
         objetivos = {'CAPTA': 0, 'WINBACK': 0}
     
-    # Calcular ventas totales del mes por campaña
     mes_actual_str = datetime.now().strftime('%Y-%m')
     ventas_capta_mes = 0
     ventas_winback_mes = 0
@@ -181,7 +169,6 @@ def show_inicio_admin():
         username = agente['username']
         campana = agente.get('campaign', 'CAPTA')
         ventas_agente = datos_puntos['ventas'].get(username, {})
-        
         for fecha, ventas_dia in ventas_agente.items():
             if fecha.startswith(mes_actual_str):
                 if campana == 'CAPTA':
@@ -189,38 +176,18 @@ def show_inicio_admin():
                 else:
                     ventas_winback_mes += len(ventas_dia)
     
-    # Mostrar objetivos con barras de progreso
     col_obj1, col_obj2 = st.columns(2)
     
     with col_obj1:
         st.write("**CAPTA**")
         obj_capta = objetivos.get('CAPTA', 0)
-        
         if obj_capta > 0:
             pct_capta = min(ventas_capta_mes / obj_capta, 1.0)
-            
-            # Métrica principal
-            st.metric(
-                "Ventas CAPTA",
-                f"{ventas_capta_mes} / {obj_capta}",
-                delta=f"{pct_capta*100:.1f}%"
-            )
-            
-            # Barra de progreso con colores por hitos
-            if pct_capta >= 1.0:
-                st.progress(1.0)
-                st.success("🏆 ¡OBJETIVO CUMPLIDO!")
-            elif pct_capta >= 0.8:
-                st.progress(pct_capta)
-                st.warning("⚠️ Al 80% - ¡Muy cerca!")
-            elif pct_capta >= 0.4:
-                st.progress(pct_capta)
-                st.info("📈 Al 40% - Buen ritmo")
-            else:
-                st.progress(pct_capta)
-                st.caption("🌱 Por debajo del 40%")
-            
-            # Marcadores visuales
+            st.metric("Ventas CAPTA", f"{ventas_capta_mes} / {obj_capta}", delta=f"{pct_capta*100:.1f}%")
+            if pct_capta >= 1.0: st.progress(1.0); st.success("🏆 ¡OBJETIVO CUMPLIDO!")
+            elif pct_capta >= 0.8: st.progress(pct_capta); st.warning("⚠️ Al 80%")
+            elif pct_capta >= 0.4: st.progress(pct_capta); st.info("📈 Al 40%")
+            else: st.progress(pct_capta); st.caption("🌱 Por debajo del 40%")
             st.caption(f"🔴 0% ─── 🟡 40% ({int(obj_capta*0.4)}) ─── 🟠 80% ({int(obj_capta*0.8)}) ─── 🟢 100% ({obj_capta})")
         else:
             st.info("Objetivo CAPTA no configurado")
@@ -228,32 +195,16 @@ def show_inicio_admin():
     with col_obj2:
         st.write("**WINBACK**")
         obj_winback = objetivos.get('WINBACK', 0)
-        
         if obj_winback > 0:
             pct_winback = min(ventas_winback_mes / obj_winback, 1.0)
-            
-            st.metric(
-                "Ventas WINBACK",
-                f"{ventas_winback_mes} / {obj_winback}",
-                delta=f"{pct_winback*100:.1f}%"
-            )
-            
-            if pct_winback >= 1.0:
-                st.progress(1.0)
-                st.success("🏆 ¡OBJETIVO CUMPLIDO!")
-            elif pct_winback >= 0.8:
-                st.progress(pct_winback)
-                st.warning("⚠️ Al 80% - ¡Muy cerca!")
-            elif pct_winback >= 0.4:
-                st.progress(pct_winback)
-                st.info("📈 Al 40% - Buen ritmo")
-            else:
-                st.progress(pct_winback)
-                st.caption("🌱 Por debajo del 40%")
-            
+            st.metric("Ventas WINBACK", f"{ventas_winback_mes} / {obj_winback}", delta=f"{pct_winback*100:.1f}%")
+            if pct_winback >= 1.0: st.progress(1.0); st.success("🏆 ¡OBJETIVO CUMPLIDO!")
+            elif pct_winback >= 0.8: st.progress(pct_winback); st.warning("⚠️ Al 80%")
+            elif pct_winback >= 0.4: st.progress(pct_winback); st.info("📈 Al 40%")
+            else: st.progress(pct_winback); st.caption("🌱 Por debajo del 40%")
             st.caption(f"🔴 0% ─── 🟡 40% ({int(obj_winback*0.4)}) ─── 🟠 80% ({int(obj_winback*0.8)}) ─── 🟢 100% ({obj_winback})")
         else:
-            st.info("Objetivo WINBACK no configurado")    
+            st.info("Objetivo WINBACK no configurado")
     
     # =============================================
     # TABLA DE AGENTES
@@ -265,7 +216,8 @@ def show_inicio_admin():
     for agente in agentes:
         username = agente['username']
         horas_diarias = agente.get('schedule', {}).get('daily_hours', 6.0)
-        sph_target = agente.get('sph_config', {}).get('target', 0.06)
+        sph_config = agente.get('sph_config', {})
+        sph_target = sph_config.get('target', 0.06)
         
         ventas_agente = 0
         llamadas_5m_agente = 0
@@ -298,10 +250,12 @@ def show_inicio_admin():
             '+5m': llamadas_5m_agente,
             '+15m': llamadas_15m_agente,
             'Ausente': '🔴' if ausente_agente else '🟢',
-            'Estado': '🟢' if sph_agente >= sph_target else '🔴'
+            'Estado': '🟢' if sph_agente >= sph_target else '🔴',
+            'Standby': '💤' if agente.get('standby') else '✅'
         })
     
     df = pd.DataFrame(data_agentes)
     df = df.sort_values('SPH', ascending=False)
     
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    columnas_mostrar = ['Agente', 'Nombre', 'Supervisor', 'Campaña', 'SPH Obj', 'SPH', 'Ventas', '+5m', '+15m', 'Ausente', 'Estado', 'Standby']
+    st.dataframe(df[columnas_mostrar], use_container_width=True, hide_index=True)

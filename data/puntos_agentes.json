@@ -1,54 +1,5 @@
 {
-    "ventas": {
-        "0613": {
-            "2026-04-24": [
-                {
-                    "producto": "Electricidad",
-                    "tipo": "CROSS",
-                    "servicios": [
-                        "PI",
-                        "FE"
-                    ],
-                    "puntos": 91
-                },
-                {
-                    "producto": "Electricidad",
-                    "tipo": "CROSS",
-                    "servicios": [
-                        "PI",
-                        "FE"
-                    ],
-                    "puntos": 91
-                }
-            ]
-        },
-        "0733": {
-            "2026-04-24": [
-                {
-                    "producto": "Electricidad",
-                    "tipo": "CAPTA",
-                    "servicios": [
-                        "PI",
-                        "FE"
-                    ],
-                    "puntos": 151
-                }
-            ]
-        },
-        "0782": {
-            "2026-04-24": [
-                {
-                    "producto": "Electricidad",
-                    "tipo": "CAPTA",
-                    "servicios": [
-                        "PI",
-                        "FE"
-                    ],
-                    "puntos": 151
-                }
-            ]
-        }
-    },
+    "ventas": {},
     "objetivos_cumplidos": {},
     "puntos_extra": {},
     "pagos_realizados": {}

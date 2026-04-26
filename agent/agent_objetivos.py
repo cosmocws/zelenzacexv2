@@ -11,17 +11,23 @@ def show_objetivos():
     agente = st.session_state.user
     username = agente['username']
     
-    # Cargar datos
     from super.super_panel import cargar_datos_puntos, cargar_registro_diario
     datos_puntos = cargar_datos_puntos()
     registro = cargar_registro_diario()
     
     # Datos del agente
-    sph_target = agente.get('sph_config', {}).get('target', 0.06)
+    sph_config = agente.get('sph_config', {})
+    sph_target = sph_config.get('target', 0.06)
     horas_diarias = agente.get('schedule', {}).get('daily_hours', 6.0)
     
     hoy = datetime.now()
     mes_actual_str = hoy.strftime('%Y-%m')
+    
+    incorporacion_str = agente.get('incorporation_date', hoy.strftime('%Y-%m-%d'))
+    try:
+        fecha_incorporacion = datetime.strptime(incorporacion_str, '%Y-%m-%d')
+    except:
+        fecha_incorporacion = hoy
     
     # Ventas del mes
     ventas_mes = 0
@@ -30,15 +36,17 @@ def show_objetivos():
         if fecha.startswith(mes_actual_str):
             ventas_mes += len(ventas_dia)
     
-    # Dias trabajados y SPH
+    # Dias trabajados desde incorporacion
     dias_laborables = 0
     dias_ausente = 0
-    for d in range(1, hoy.day + 1):
+    dia_inicio = max(fecha_incorporacion.day, 1) if fecha_incorporacion.month == hoy.month else 1
+    for d in range(dia_inicio, hoy.day + 1):
         fecha_check = datetime(hoy.year, hoy.month, d)
         if fecha_check.weekday() < 5:
             dias_laborables += 1
             fecha_str = fecha_check.strftime('%Y-%m-%d')
-            if registro.get(fecha_str, {}).get(username, {}).get('ausente', False):
+            reg_dia = registro.get(fecha_str, {}).get(username, {})
+            if reg_dia.get('ausente', False):
                 dias_ausente += 1
     
     dias_efectivos = max(0, dias_laborables - dias_ausente)
@@ -52,7 +60,6 @@ def show_objetivos():
         if datetime(hoy.year, hoy.month, d).weekday() < 5:
             dias_restantes += 1
     
-    # Considerar ausencias futuras
     ausencias_futuras = 0
     for d in range(hoy.day + 1, dias_totales_mes + 1):
         fecha_str = datetime(hoy.year, hoy.month, d).strftime('%Y-%m-%d')
@@ -74,7 +81,6 @@ def show_objetivos():
     with col_o4:
         st.metric("Objetivo Mensual", objetivo_ventas_mes, delta=f"{ventas_mes - objetivo_ventas_mes}")
     
-    # Dias trabajados
     st.write("### 📅 Dias del Mes")
     col_d1, col_d2, col_d3 = st.columns(3)
     with col_d1:
@@ -102,7 +108,7 @@ def show_objetivos():
         if obj7.get('otros'):
             st.info(f"📝 **Otros:** {obj7['otros']}")
     else:
-        st.info("No tienes objetivos a 7 dias asignados en tu ultima monitorizacion.")
+        st.info("No tienes objetivos a 7 dias asignados.")
     
     # Llamadas del mes
     st.markdown("---")
@@ -112,8 +118,9 @@ def show_objetivos():
     llamadas_15m_mes = 0
     for fecha, datos_dia in registro.items():
         if fecha.startswith(mes_actual_str) and username in datos_dia:
-            llamadas_5m_mes += datos_dia[username].get('llamadas_5m', 0)
-            llamadas_15m_mes += datos_dia[username].get('llamadas_15m', 0)
+            reg_dia = datos_dia[username]
+            llamadas_5m_mes += reg_dia.get('llamadas_5m', 0)
+            llamadas_15m_mes += reg_dia.get('llamadas_15m', 0)
     
     col_l1, col_l2 = st.columns(2)
     with col_l1:

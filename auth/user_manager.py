@@ -2,8 +2,7 @@
 import json
 import os
 import hashlib
-import math
-from typing import Optional, List, Dict, Tuple
+from typing import Optional, List, Dict
 from datetime import datetime, timedelta
 
 class UserManager:
@@ -31,11 +30,8 @@ class UserManager:
     def _save_users(self, users: List[Dict]):
         with open(self.users_file, 'w', encoding='utf-8') as f:
             json.dump(users, f, indent=2, ensure_ascii=False)
-        try:
-            from core.github_sync import sync_archivo
-            sync_archivo(self.users_file)
-        except:
-            pass
+        from core.github_sync import sync_archivo
+        sync_archivo(self.users_file)
     
     @staticmethod
     def _hash_password(password: str) -> str:
@@ -81,15 +77,12 @@ class UserManager:
             "role": "admin",
             "nombre": "Administrador",
             "id_empleado": "",
-            "email": "admin@zelenza.com",
             "campaign": None,
             "team": "Administracion",
             "manager": None,
-            "schedule": {"start_time": "09:00", "end_time": "18:00", "working_days": [0, 1, 2, 3, 4], "daily_hours": 9.0, "weekly_hours": 45.0, "type": "full_time"},
+            "schedule": self.create_default_schedule("09:00", "18:00"),
             "managed_agents": [],
             "sph_config": None,
-            "campaign_history": None,
-            "active_absence": None,
             "incorporation_date": datetime.now().strftime('%Y-%m-%d'),
             "created_at": datetime.now().isoformat(),
             "last_login": None
@@ -99,23 +92,25 @@ class UserManager:
     
     def create_user(self, username: str, password: str, role: str = "agent",
                     nombre: str = "", id_empleado: str = "",
-                    email: str = "", campaign: str = "CAPTA",
-                    team: str = "Sin equipo", manager: Optional[str] = None,
-                    schedule: Optional[Dict] = None, sph_target: float = 0.06) -> Dict:
+                    campaign: str = "CAPTA", team: str = "Sin equipo",
+                    manager: Optional[str] = None, schedule: Optional[Dict] = None,
+                    sph_target: float = 0.06) -> Dict:
         if role not in self.VALID_ROLES:
-            raise ValueError(f"Rol '{role}' no valido. Usar: {self.VALID_ROLES}")
+            raise ValueError(f"Rol '{role}' no valido")
         users = self._load_users()
         if any(u['username'] == username for u in users):
-            raise ValueError(f"El usuario '{username}' ya existe.")
+            raise ValueError(f"El usuario '{username}' ya existe")
         if schedule is None:
             schedule = self.create_default_schedule()
+        
+        hoy = datetime.now().strftime('%Y-%m-%d')
+        
         new_user = {
             "username": username,
             "password_hash": self._hash_password(password),
             "role": role,
             "nombre": nombre,
             "id_empleado": id_empleado,
-            "email": email,
             "campaign": campaign if role == "agent" else None,
             "team": team,
             "manager": manager,
@@ -124,14 +119,14 @@ class UserManager:
             "sph_config": {
                 "target": sph_target,
                 "enabled": True,
-                "start_date": datetime.now().strftime('%Y-%m-%d'),
+                "start_date": hoy,
                 "history": [{"target": sph_target, "set_at": datetime.now().isoformat()}]
             } if role == "agent" else None,
-            "campaign_history": [{"from": None, "to": "CAPTA", "changed_at": datetime.now().isoformat()}] if role == "agent" else None,
-            "active_absence": None,
-            "incorporation_date": datetime.now().strftime('%Y-%m-%d'),
+            "incorporation_date": hoy,
             "created_at": datetime.now().isoformat(),
-            "last_login": None
+            "last_login": None,
+            "standby": False,
+            "usuario_padre": None
         }
         if manager:
             for u in users:
@@ -167,10 +162,10 @@ class UserManager:
         for user in users:
             if user['username'] == username:
                 if 'schedule' in updates and isinstance(updates['schedule'], dict):
-                    schedule = updates['schedule']
-                    if 'start_time' in schedule and 'end_time' in schedule:
-                        schedule['daily_hours'] = self._calculate_daily_hours(schedule['start_time'], schedule['end_time'])
-                        schedule['weekly_hours'] = self._calculate_weekly_hours(schedule['start_time'], schedule['end_time'], schedule.get('working_days', [0,1,2,3,4]))
+                    s = updates['schedule']
+                    if 'start_time' in s and 'end_time' in s:
+                        s['daily_hours'] = self._calculate_daily_hours(s['start_time'], s['end_time'])
+                        s['weekly_hours'] = self._calculate_weekly_hours(s['start_time'], s['end_time'], s.get('working_days', [0,1,2,3,4]))
                 if 'sph_target' in updates:
                     if 'sph_config' not in user:
                         user['sph_config'] = {'history': []}
@@ -203,7 +198,6 @@ class UserManager:
         users = self._load_users()
         deleted = []
         errors = []
-        cleaned = {"managers": set()}
         to_delete_set = set(usernames)
         for username in usernames:
             user = next((u for u in users if u['username'] == username), None)
@@ -213,19 +207,19 @@ class UserManager:
                         if u['username'] == user['manager']:
                             if username in u.get('managed_agents', []):
                                 u['managed_agents'].remove(username)
-                                cleaned["managers"].add(user['manager'])
                 deleted.append(username)
             else:
                 errors.append(f"Usuario '{username}' no encontrado")
         users = [u for u in users if u['username'] not in to_delete_set]
         self._save_users(users)
-        return {"deleted": len(deleted), "errors": errors, "deleted_users": deleted, "cleaned_references": {"managers_updated": list(cleaned["managers"])}}
+        return {"deleted": len(deleted), "errors": errors, "deleted_users": deleted}
     
     def create_agents_bulk(self, agents_data: List[Dict]) -> Dict:
         users = self._load_users()
         existing_usernames = {u['username'] for u in users}
         created = []
         errors = []
+        hoy = datetime.now().strftime('%Y-%m-%d')
         for agent in agents_data:
             username = agent['username']
             if username in existing_usernames:
@@ -242,22 +236,20 @@ class UserManager:
                 "role": "agent",
                 "nombre": agent.get('nombre', ''),
                 "id_empleado": agent.get('id_empleado', ''),
-                "email": agent.get('email', ''),
                 "campaign": "CAPTA",
                 "team": agent.get('team', 'Sin equipo'),
                 "manager": agent.get('manager'),
                 "schedule": schedule,
                 "managed_agents": [],
                 "sph_config": {
-                    "target": sph_target, "enabled": True,
-                    "start_date": datetime.now().strftime('%Y-%m-%d'),
+                    "target": sph_target, "enabled": True, "start_date": hoy,
                     "history": [{"target": sph_target, "set_at": datetime.now().isoformat()}]
                 },
-                "campaign_history": [{"from": None, "to": "CAPTA", "changed_at": datetime.now().isoformat()}],
-                "active_absence": None,
-                "incorporation_date": datetime.now().strftime('%Y-%m-%d'),
+                "incorporation_date": hoy,
                 "created_at": datetime.now().isoformat(),
-                "last_login": None
+                "last_login": None,
+                "standby": False,
+                "usuario_padre": None
             }
             if agent.get('manager'):
                 for u in users:
@@ -269,28 +261,93 @@ class UserManager:
             created.append(username)
             existing_usernames.add(username)
         self._save_users(users)
-        return {"created": len(created), "errors": errors, "users": [u for u in users if u['username'] in created]}
+        return {"created": len(created), "errors": errors}
     
-    def change_campaign_bulk(self, usernames: List[str], new_campaign: str) -> Dict:
-        if new_campaign not in self.VALID_CAMPAIGNS:
-            return {"updated": 0, "errors": [f"Campana '{new_campaign}' no valida"], "updated_users": []}
+    # =============================================
+    # SISTEMA W (WINBACK)
+    # =============================================
+    
+    def mover_a_winback(self, username: str) -> Dict:
+        """Crea el usuario W+username en WINBACK y pone el original en standby."""
         users = self._load_users()
-        updated = []
-        errors = []
-        for username in usernames:
-            user = next((u for u in users if u['username'] == username), None)
-            if user:
-                old_campaign = user.get('campaign', 'CAPTA')
-                user['campaign'] = new_campaign
-                if 'campaign_history' not in user:
-                    user['campaign_history'] = []
-                user['campaign_history'].append({"from": old_campaign, "to": new_campaign, "changed_at": datetime.now().isoformat()})
-                updated.append(username)
-            else:
-                errors.append(f"Usuario '{username}' no encontrado")
-        if updated:
-            self._save_users(users)
-        return {"updated": len(updated), "errors": errors, "updated_users": updated}
+        original = next((u for u in users if u['username'] == username), None)
+        if not original:
+            return {"success": False, "error": "Usuario no encontrado"}
+        if original['role'] != 'agent':
+            return {"success": False, "error": "Solo se puede mover agentes"}
+        if original.get('campaign') == 'WINBACK':
+            return {"success": False, "error": "Ya esta en WINBACK"}
+        
+        w_username = f"W{username}"
+        if any(u['username'] == w_username for u in users):
+            return {"success": False, "error": f"El usuario {w_username} ya existe"}
+        
+        # Poner original en standby
+        original['standby'] = True
+        
+        # Crear usuario W
+        hoy = datetime.now().strftime('%Y-%m-%d')
+        nuevo_w = {
+            "username": w_username,
+            "password_hash": original['password_hash'],
+            "role": "agent",
+            "nombre": original.get('nombre', ''),
+            "id_empleado": original.get('id_empleado', ''),
+            "campaign": "WINBACK",
+            "team": original.get('team', 'Sin equipo'),
+            "manager": original.get('manager'),
+            "schedule": original.get('schedule', self.create_default_schedule()),
+            "managed_agents": [],
+            "sph_config": {
+                "target": 0.06, "enabled": True, "start_date": hoy,
+                "history": [{"target": 0.06, "set_at": datetime.now().isoformat()}]
+            },
+            "incorporation_date": hoy,
+            "created_at": datetime.now().isoformat(),
+            "last_login": None,
+            "standby": False,
+            "usuario_padre": username
+        }
+        users.append(nuevo_w)
+        
+        # Añadir al supervisor
+        if original.get('manager'):
+            for u in users:
+                if u['username'] == original['manager'] and u['role'] == 'super':
+                    if 'managed_agents' not in u:
+                        u['managed_agents'] = []
+                    u['managed_agents'].append(w_username)
+        
+        self._save_users(users)
+        return {"success": True, "w_username": w_username}
+    
+    def reactivar_de_winback(self, w_username: str) -> Dict:
+        """Reactiva el usuario original desde WINBACK y pone W en standby."""
+        if not w_username.startswith('W'):
+            return {"success": False, "error": "El usuario no es W (WINBACK)"}
+        
+        users = self._load_users()
+        w_user = next((u for u in users if u['username'] == w_username), None)
+        if not w_user:
+            return {"success": False, "error": "Usuario W no encontrado"}
+        
+        original_username = w_user.get('usuario_padre', w_username[1:])
+        original = next((u for u in users if u['username'] == original_username), None)
+        if not original:
+            return {"success": False, "error": f"Usuario original {original_username} no encontrado"}
+        
+        # Poner W en standby, reactivar original
+        w_user['standby'] = True
+        original['standby'] = False
+        original['campaign'] = 'CAPTA'
+        
+        self._save_users(users)
+        return {"success": True, "original": original_username}
+    
+    def get_usuarios_activos(self) -> List[Dict]:
+        """Devuelve solo usuarios NO en standby."""
+        users = self._load_users()
+        return [u for u in users if not u.get('standby', False)]
     
     def get_users_by_role(self, role: str) -> List[Dict]:
         users = self._load_users()
@@ -306,3 +363,7 @@ class UserManager:
     
     def get_all_agents(self) -> List[Dict]:
         return self.get_users_by_role("agent")
+    
+    def change_campaign_bulk(self, usernames: List[str], new_campaign: str) -> Dict:
+        """Ya no se usa - reemplazado por mover_a_winback"""
+        return {"updated": 0, "errors": ["Usa mover_a_winback en su lugar"], "updated_users": []}

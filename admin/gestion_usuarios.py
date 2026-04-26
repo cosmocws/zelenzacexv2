@@ -11,10 +11,10 @@ def show_gestion_usuarios():
     um = st.session_state.user_manager
     
     tab1, tab2, tab3, tab4 = st.tabs([
-        "👤 Crear Usuario", 
-        "✏️ Modificar Usuario", 
-        "🗑️ Gestionar Bajas", 
-        "🔄 Cambio Masivo Campaña"
+        "👤 Crear Usuario",
+        "✏️ Modificar Usuario",
+        "🗑️ Gestionar Bajas",
+        "🔄 Mover a WINBACK / CAPTA"
     ])
     
     # =============================================
@@ -50,35 +50,29 @@ def show_gestion_usuarios():
                         campaign = None
                         manager = None
                 
-                # --- Configuracion del agente (SPH y Horario) ---
                 if role == "agent":
                     st.markdown("---")
                     st.write("⚙️ Configuracion del Agente")
-                    col_sph1, col_sph2, col_sph3 = st.columns(3)
-                    with col_sph1:
-                        sph_target = st.number_input(
-                            "SPH Objetivo",
-                            min_value=0.01, max_value=1.0, value=0.06, step=0.01, format="%.2f",
-                            help="SPH objetivo (0.06 para noveles)"
-                        )
-                    with col_sph2:
-                        horas_diarias = st.number_input(
-                            "Horas diarias",
-                            min_value=1.0, max_value=8.0, value=6.0, step=0.5, format="%.1f",
-                            help="Horas trabajadas al dia"
-                        )
-                    with col_sph3:
-                        working_days = st.multiselect(
-                            "Dias laborables",
-                            ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"],
-                            default=["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"]
-                        )
                     
-                    col_h1, col_h2 = st.columns(2)
+                    sph_target = st.number_input(
+                        "SPH Objetivo", min_value=0.01, max_value=1.0, value=0.06, step=0.01, format="%.2f",
+                        help="SPH objetivo para este agente"
+                    )
+                    
+                    st.write("**Horario**")
+                    col_h1, col_h2, col_h3 = st.columns(3)
                     with col_h1:
-                        hora_inicio = st.text_input("Hora de inicio", value="15:00", help="Formato HH:MM")
+                        horas_diarias = st.number_input("Horas diarias", min_value=1.0, max_value=8.0, value=6.0, step=0.5, format="%.1f")
                     with col_h2:
-                        hora_fin = st.text_input("Hora de fin", value="21:00", help="Formato HH:MM")
+                        hora_inicio = st.text_input("Hora inicio", value="15:00", help="Formato HH:MM")
+                    with col_h3:
+                        hora_fin = st.text_input("Hora fin", value="21:00", help="Formato HH:MM")
+                    
+                    working_days = st.multiselect(
+                        "Dias laborables",
+                        ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"],
+                        default=["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"]
+                    )
                 else:
                     sph_target = None
                     horas_diarias = None
@@ -93,10 +87,7 @@ def show_gestion_usuarios():
                         st.error("Nombre de usuario y contrasena son obligatorios")
                     else:
                         try:
-                            dias_semana = {
-                                "Lunes": 0, "Martes": 1, "Miercoles": 2,
-                                "Jueves": 3, "Viernes": 4, "Sabado": 5, "Domingo": 6
-                            }
+                            dias_semana = {"Lunes": 0, "Martes": 1, "Miercoles": 2, "Jueves": 3, "Viernes": 4}
                             working_days_list = [dias_semana[d] for d in working_days] if working_days else [0, 1, 2, 3, 4]
                             
                             schedule = None
@@ -120,49 +111,47 @@ def show_gestion_usuarios():
                                 team=team,
                                 manager=manager,
                                 schedule=schedule,
-                                sph_target=sph_target
+                                sph_target=sph_target or 0.06
                             )
                             st.success(f"✅ Usuario '{username}' creado con exito!")
                         except ValueError as e:
                             st.error(str(e))
         
-        else:  # Modo Bulk
+        else:
             st.info("Pega los datos en formato: `username,password,nombre,id_empleado,team,manager` (uno por linea)")
             
             bulk_text = st.text_area(
                 "Datos de usuarios:",
-                placeholder="agente01,pass123,Nombre Apellido,1469,Equipo A,super01\nagente02,pass456,Otro Nombre,1470,Equipo B,super02",
+                placeholder="agente01,pass123,Nombre Apellido,1469,Equipo A,super01",
                 height=150
             )
             
-            # Configuracion comun para todos
             st.markdown("---")
             st.write("⚙️ Configuracion para TODOS los agentes:")
+            
+            bulk_sph = st.number_input("SPH Objetivo", min_value=0.01, max_value=1.0, value=0.06, step=0.01, format="%.2f", key="bulk_sph")
+            
             col_b1, col_b2, col_b3 = st.columns(3)
             with col_b1:
-                bulk_sph = st.number_input("SPH Objetivo", min_value=0.01, max_value=1.0, value=0.06, step=0.01, format="%.2f", key="bulk_sph")
-            with col_b2:
                 bulk_horas = st.number_input("Horas diarias", min_value=1.0, max_value=8.0, value=6.0, step=0.5, format="%.1f", key="bulk_horas")
-            with col_b3:
-                bulk_dias = st.multiselect(
-                    "Dias laborables",
-                    ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"],
-                    default=["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"],
-                    key="bulk_dias"
-                )
-            
-            col_bh1, col_bh2 = st.columns(2)
-            with col_bh1:
+            with col_b2:
                 bulk_hora_ini = st.text_input("Hora inicio", value="15:00", key="bulk_ini")
-            with col_bh2:
+            with col_b3:
                 bulk_hora_fin = st.text_input("Hora fin", value="21:00", key="bulk_fin")
+            
+            bulk_dias = st.multiselect(
+                "Dias laborables",
+                ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"],
+                default=["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"],
+                key="bulk_dias"
+            )
             
             if st.button("🚀 Crear Usuarios en Bloque", use_container_width=True):
                 if bulk_text:
                     lines = [l.strip() for l in bulk_text.split('\n') if l.strip()]
                     agents_data = []
                     
-                    dias_semana = {"Lunes": 0, "Martes": 1, "Miercoles": 2, "Jueves": 3, "Viernes": 4, "Sabado": 5, "Domingo": 6}
+                    dias_semana = {"Lunes": 0, "Martes": 1, "Miercoles": 2, "Jueves": 3, "Viernes": 4}
                     working_days_list = [dias_semana[d] for d in bulk_dias] if bulk_dias else [0, 1, 2, 3, 4]
                     
                     for line in lines:
@@ -218,10 +207,7 @@ def show_gestion_usuarios():
                         new_team = st.text_input("Equipo", value=user_data.get('team', ''))
                         
                         if user_data['role'] == 'agent':
-                            new_campaign = st.selectbox(
-                                "Campaña", ["CAPTA", "WINBACK"],
-                                index=0 if user_data.get('campaign') == 'CAPTA' else 1
-                            )
+                            st.write(f"**Campaña actual:** {user_data.get('campaign', 'CAPTA')}")
                             supervisores = um.get_users_by_role("super")
                             super_options = ["Ninguno"] + [s['username'] for s in supervisores]
                             current_manager = user_data.get('manager', 'Ninguno') or 'Ninguno'
@@ -235,13 +221,18 @@ def show_gestion_usuarios():
                     
                     with col2:
                         st.write(f"**Rol:** {user_data['role']}")
+                        if user_data.get('standby', False):
+                            st.warning("⚠️ Este usuario esta en STANDBY")
+                        if user_data.get('usuario_padre'):
+                            st.info(f"🔗 Usuario padre: {user_data['usuario_padre']}")
+                        
                         new_password = st.text_input("Nueva contrasena (dejar vacio para no cambiar)", type="password")
                         
                         if user_data['role'] == 'agent':
-                            current_sph = user_data.get('sph_config', {}).get('target', 0.06)
-                            new_sph = st.number_input("SPH Objetivo", min_value=0.01, max_value=1.0, value=current_sph, step=0.01, format="%.2f")
+                            sph_config = user_data.get('sph_config', {})
+                            sph_actual = sph_config.get('target', 0.06)
+                            new_sph = st.number_input("SPH Objetivo", min_value=0.01, max_value=1.0, value=sph_actual, step=0.01, format="%.2f")
                             
-                            # Editar horario
                             st.markdown("---")
                             st.write("🕐 Horario")
                             schedule = user_data.get('schedule', {})
@@ -253,12 +244,12 @@ def show_gestion_usuarios():
                             with col_h3:
                                 new_horas_dia = st.number_input("Horas diarias", min_value=1.0, max_value=8.0, value=schedule.get('daily_hours', 6.0), step=0.5, format="%.1f")
                             
-                            dias_semana = {0: "Lunes", 1: "Martes", 2: "Miercoles", 3: "Jueves", 4: "Viernes", 5: "Sabado", 6: "Domingo"}
+                            dias_semana = {0: "Lunes", 1: "Martes", 2: "Miercoles", 3: "Jueves", 4: "Viernes"}
                             current_days = schedule.get('working_days', [0, 1, 2, 3, 4])
                             dias_nombres = [dias_semana[d] for d in current_days if d in dias_semana]
                             new_dias = st.multiselect(
                                 "Dias laborables",
-                                ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"],
+                                ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"],
                                 default=dias_nombres
                             )
                     
@@ -273,17 +264,15 @@ def show_gestion_usuarios():
                         if new_team != user_data.get('team'):
                             updates['team'] = new_team
                         if user_data['role'] == 'agent':
-                            if new_campaign != user_data.get('campaign'):
-                                updates['campaign'] = new_campaign
                             if new_manager != user_data.get('manager'):
                                 updates['manager'] = new_manager
-                            if new_sph != current_sph:
+                            if new_sph != sph_actual:
                                 updates['sph_target'] = new_sph
                             
-                            dias_map = {"Lunes": 0, "Martes": 1, "Miercoles": 2, "Jueves": 3, "Viernes": 4, "Sabado": 5, "Domingo": 6}
+                            dias_map = {"Lunes": 0, "Martes": 1, "Miercoles": 2, "Jueves": 3, "Viernes": 4}
                             nuevos_dias_list = [dias_map[d] for d in new_dias]
-                            if (new_hora_ini != schedule.get('start_time') or 
-                                new_hora_fin != schedule.get('end_time') or 
+                            if (new_hora_ini != schedule.get('start_time') or
+                                new_hora_fin != schedule.get('end_time') or
                                 new_horas_dia != schedule.get('daily_hours') or
                                 nuevos_dias_list != schedule.get('working_days')):
                                 updates['schedule'] = {
@@ -319,13 +308,13 @@ def show_gestion_usuarios():
             'Rol': u['role'],
             'Equipo': u.get('team', ''),
             'Campaña': u.get('campaign', ''),
-            'Supervisor': u.get('manager', '')
+            'Supervisor': u.get('manager', ''),
+            'Standby': '💤' if u.get('standby') else '✅'
         } for u in all_users])
         
         st.dataframe(users_df, use_container_width=True, hide_index=True)
         
         st.write("---")
-        
         delete_mode = st.radio("Modo de baja:", ["Individual", "Masivo (Bulk)"], horizontal=True)
         
         if delete_mode == "Individual":
@@ -333,7 +322,6 @@ def show_gestion_usuarios():
                 "Seleccionar usuario a eliminar:",
                 [u for u in usernames if u != st.session_state.user['username']]
             )
-            
             if st.button("🗑️ Eliminar Usuario", type="primary", use_container_width=True):
                 if user_to_delete:
                     um.delete_user(user_to_delete)
@@ -344,7 +332,6 @@ def show_gestion_usuarios():
                 "Seleccionar usuarios a eliminar:",
                 [u for u in usernames if u != st.session_state.user['username']]
             )
-            
             if users_to_delete and st.button("🗑️ Eliminar Seleccionados", type="primary", use_container_width=True):
                 result = um.delete_agents_bulk(users_to_delete)
                 st.success(f"✅ Eliminados: {result['deleted']} usuarios")
@@ -355,34 +342,53 @@ def show_gestion_usuarios():
                 st.rerun()
     
     # =============================================
-    # PESTAÑA 4: CAMBIO MASIVO DE CAMPAÑA
+    # PESTAÑA 4: SISTEMA W (WINBACK)
     # =============================================
     with tab4:
-        st.subheader("Cambiar Campaña en Bloque")
+        st.subheader("🔄 Sistema W - Mover a WINBACK / Reactivar CAPTA")
+        st.caption("Al mover a WINBACK se crea un usuario W+NOMBRE. El original queda en standby.")
         
-        agentes = um.get_all_agents()
+        subtab1, subtab2 = st.tabs(["➡️ Mover a WINBACK", "⬅️ Reactivar CAPTA"])
         
-        col1, col2 = st.columns(2)
-        with col1:
-            capta_count = len(um.get_agents_by_campaign("CAPTA"))
-            st.metric("En CAPTA", capta_count)
-        with col2:
-            winback_count = len(um.get_agents_by_campaign("WINBACK"))
-            st.metric("En WINBACK", winback_count)
+        with subtab1:
+            st.write("### Mover agente CAPTA → WINBACK")
+            agentes_capta = [a for a in um.get_all_agents() if a.get('campaign') == 'CAPTA' and not a.get('standby', False)]
+            
+            if agentes_capta:
+                agente_a_mover = st.selectbox(
+                    "Seleccionar agente:",
+                    [a['username'] for a in agentes_capta],
+                    format_func=lambda x: f"{x} ({next((a.get('nombre', x) for a in agentes_capta if a['username'] == x), x)})",
+                    key="mover_winback"
+                )
+                
+                if st.button("➡️ Mover a WINBACK", type="primary", use_container_width=True):
+                    resultado = um.mover_a_winback(agente_a_mover)
+                    if resultado['success']:
+                        st.success(f"✅ Usuario W{agente_a_mover} creado en WINBACK. {agente_a_mover} en standby.")
+                        st.info(f"🔑 El nuevo usuario puede iniciar sesion como: **{resultado['w_username']}** con la misma contrasena.")
+                    else:
+                        st.error(f"❌ {resultado['error']}")
+            else:
+                st.info("No hay agentes activos en CAPTA.")
         
-        st.write("---")
-        
-        agents_to_move = st.multiselect(
-            "Seleccionar agentes a mover:",
-            [a['username'] for a in agentes],
-            format_func=lambda x: f"{x} ({next((a['campaign'] for a in agentes if a['username'] == x), 'N/A')})"
-        )
-        
-        new_campaign = st.selectbox("Nueva campaña:", ["WINBACK", "CAPTA"])
-        
-        if agents_to_move and st.button("🔄 Cambiar Campaña", use_container_width=True):
-            result = um.change_campaign_bulk(agents_to_move, new_campaign)
-            st.success(f"✅ {result['updated']} agentes movidos a {new_campaign}!")
-            if st.session_state.github_sync:
-                st.session_state.github_sync.sync_all_data_files()
-            st.rerun()
+        with subtab2:
+            st.write("### Reactivar agente WINBACK → CAPTA")
+            agentes_winback = [a for a in um.get_all_agents() if a.get('campaign') == 'WINBACK' and not a.get('standby', False) and a['username'].startswith('W')]
+            
+            if agentes_winback:
+                agente_a_reactivar = st.selectbox(
+                    "Seleccionar agente W:",
+                    [a['username'] for a in agentes_winback],
+                    format_func=lambda x: f"{x} → {x[1:]} ({next((a.get('nombre', x) for a in agentes_winback if a['username'] == x), x)})",
+                    key="reactivar_capta"
+                )
+                
+                if st.button("⬅️ Reactivar en CAPTA", type="primary", use_container_width=True):
+                    resultado = um.reactivar_de_winback(agente_a_reactivar)
+                    if resultado['success']:
+                        st.success(f"✅ {agente_a_reactivar} en standby. {resultado['original']} reactivado en CAPTA.")
+                    else:
+                        st.error(f"❌ {resultado['error']}")
+            else:
+                st.info("No hay agentes W activos en WINBACK.")
