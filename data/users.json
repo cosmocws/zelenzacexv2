@@ -1,0 +1,753 @@
+[
+  {
+    "username": "admin",
+    "password_hash": "b38676ef722c2e8fd233baf39cce72b7c10fd019649391fe8869507c7378296f",
+    "role": "admin",
+    "nombre": "Administrador",
+    "id_empleado": "",
+    "email": "admin@zelenza.com",
+    "campaign": null,
+    "team": "Administracion",
+    "manager": null,
+    "schedule": {
+      "start_time": "09:00",
+      "end_time": "18:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 9.0,
+      "weekly_hours": 45.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": null,
+    "campaign_history": null,
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T22:38:36.615859",
+    "last_login": "2026-04-26T02:31:04.890391"
+  },
+  {
+    "username": "0731",
+    "password_hash": "f37f559d25de4aa17b6dedd021baa32094685e69664871b1e6f029dc058907dc",
+    "role": "super",
+    "nombre": "Luis Ortega",
+    "id_empleado": "0001",
+    "email": "",
+    "campaign": null,
+    "team": "",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [
+      "0202",
+      "0381",
+      "0492",
+      "0613",
+      "0657",
+      "0733",
+      "0775",
+      "0782",
+      "0821",
+      "0828",
+      "0883",
+      "0916",
+      "1011",
+      "1012"
+    ],
+    "sph_config": null,
+    "campaign_history": null,
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T22:40:41.040373",
+    "last_login": "2026-04-26T02:46:29.376207"
+  },
+  {
+    "username": "0202",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Sara Garrido",
+    "id_empleado": "316",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-25T22:41:50.388666"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T22:41:50.388670"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T22:41:50.388678",
+    "last_login": "2026-04-26T03:01:13.817109"
+  },
+  {
+    "username": "0381",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Luis Martín",
+    "id_empleado": "793",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-25T23:25:05.570384"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:25:05.570388"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:25:05.570396",
+    "last_login": null
+  },
+  {
+    "username": "0492",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Aya Gartit",
+    "id_empleado": "958",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-25T23:25:28.917184"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:25:28.917189"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:25:28.917196",
+    "last_login": null
+  },
+  {
+    "username": "0613",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Nuria Roldán",
+    "id_empleado": "1206",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-25T23:25:52.957821"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:25:52.957825"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:25:52.957832",
+    "last_login": null
+  },
+  {
+    "username": "0657",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Rocio Moslero",
+    "id_empleado": "1290",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-25T23:26:15.384322"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:26:15.384327"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:26:15.384333",
+    "last_login": null
+  },
+  {
+    "username": "0733",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Álvaro Morales",
+    "id_empleado": "1389",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-25T23:26:38.739846"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:26:38.739850"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:26:38.739856",
+    "last_login": null
+  },
+  {
+    "username": "0775",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Carmen López",
+    "id_empleado": "1316",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-25T23:27:08.894346"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:27:08.894350"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:27:08.894357",
+    "last_login": null
+  },
+  {
+    "username": "0782",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Rocío Miranda",
+    "id_empleado": "1410",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-25T23:27:35.133922"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:27:35.133926"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:27:35.133933",
+    "last_login": null
+  },
+  {
+    "username": "0821",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Irene Benítez",
+    "id_empleado": "1496",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-25T23:27:52.053181"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:27:52.053185"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:27:52.053192",
+    "last_login": null
+  },
+  {
+    "username": "0828",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Marisol Sotomayor",
+    "id_empleado": "1517",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-25T23:28:16.701063"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:28:16.701067"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:28:16.701074",
+    "last_login": null
+  },
+  {
+    "username": "0883",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Javier Mateo",
+    "id_empleado": "1555",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-25T23:28:37.635035"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:28:37.635039"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:28:37.635046",
+    "last_login": null
+  },
+  {
+    "username": "0916",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Iván Arras",
+    "id_empleado": "1595",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-25T23:28:58.541606"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:28:58.541610"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:28:58.541616",
+    "last_login": null
+  },
+  {
+    "username": "1011",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Alex García",
+    "id_empleado": "1725",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-25T23:29:32.201274"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:29:32.201278"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:29:32.201284",
+    "last_login": null
+  },
+  {
+    "username": "1012",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Eduardo Carmona",
+    "id_empleado": "1716",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-25",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-25T23:30:14.685102"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-25T23:30:14.685107"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T23:30:14.685113",
+    "last_login": null
+  }
+]

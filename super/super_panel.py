@@ -1,0 +1,904 @@
+# super/super_panel.py
+import streamlit as st
+import pandas as pd
+import json
+import os
+from datetime import datetime, timedelta
+from calendar import monthrange
+
+# =============================================
+# CONFIGURACIÓN DE PUNTOS POR PRODUCTO
+# =============================================
+
+PUNTOS_PRODUCTO = {
+    "CAPTA": {
+        "Electricidad": {"no_cumple": 100, "cumple": 180},
+        "Gas": {"no_cumple": 40, "cumple": 70},
+        "Pack Iberdrola (PI)": {"no_cumple": 50, "cumple": 90},
+        "UEN": {"no_cumple": 50, "cumple": 90},
+        "Pack Mantenimiento Gas (PMG)": {"no_cumple": 20, "cumple": 30},
+        "Facturación Electrónica (FE)": {"no_cumple": 1, "cumple": 1},
+    },
+    "CROSS": {
+        "Electricidad": {"no_cumple": 60, "cumple": 100},
+        "Gas": {"no_cumple": 20, "cumple": 40},
+        "Pack Iberdrola (PI)": {"no_cumple": 30, "cumple": 50},
+        "UEN": {"no_cumple": 30, "cumple": 50},
+        "Pack Mantenimiento Gas (PMG)": {"no_cumple": 10, "cumple": 20},
+        "Facturación Electrónica (FE)": {"no_cumple": 1, "cumple": 1},
+    }
+}
+
+PRODUCTOS = ["Electricidad", "Gas", "Pack Iberdrola (PI)", "UEN", "Pack Mantenimiento Gas (PMG)", "Facturación Electrónica (FE)"]
+TIPOS_VENTA = ["CAPTA", "CROSS"]
+
+# =============================================
+# FUNCIONES DE CARGA/GUARDADO - TABLA CENTRAL
+# =============================================
+
+def cargar_registro_diario():
+    """
+    Carga la tabla central unificada.
+    Estructura: { "YYYY-MM-DD": { "username": { ... } } }
+    """
+    try:
+        with open('data/registro_diario.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+def guardar_registro_diario(datos):
+    """Guarda la tabla central."""
+    os.makedirs('data', exist_ok=True)
+    with open('data/registro_diario.json', 'w', encoding='utf-8') as f:
+        json.dump(datos, f, indent=4, ensure_ascii=False)
+    if st.session_state.get('github_sync'):
+        st.session_state.github_sync.sync_file('data/registro_diario.json')
+
+def cargar_datos_puntos():
+    """Carga el archivo de puntos (ventas detalladas, extras, objetivos, pagos)."""
+    try:
+        with open('data/puntos_agentes.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {
+            "ventas": {},
+            "objetivos_cumplidos": {},
+            "puntos_extra": {},
+            "pagos_realizados": {}
+        }
+
+def guardar_datos_puntos(datos):
+    """Guarda el archivo de puntos."""
+    os.makedirs('data', exist_ok=True)
+    with open('data/puntos_agentes.json', 'w', encoding='utf-8') as f:
+        json.dump(datos, f, indent=4, ensure_ascii=False)
+    if st.session_state.get('github_sync'):
+        st.session_state.github_sync.sync_file('data/puntos_agentes.json')
+
+def obtener_fecha_hoy():
+    return datetime.now().strftime('%Y-%m-%d')
+
+def obtener_meses_con_ventas(ventas_agente):
+    meses = set()
+    if ventas_agente:
+        for fecha in ventas_agente.keys():
+            meses.add(fecha[:7])
+    return sorted(meses, reverse=True)
+
+def calcular_puntos_agente_mes(ventas_agente, mes_str, mes_cumplido=False):
+    total_puntos = 0
+    if not ventas_agente:
+        return 0
+    for fecha, ventas_dia in ventas_agente.items():
+        if fecha.startswith(mes_str):
+            for venta in ventas_dia:
+                if mes_cumplido:
+                    producto = venta.get('producto', '')
+                    tipo = venta.get('tipo', 'CAPTA')
+                    puntos = PUNTOS_PRODUCTO.get(tipo, {}).get(producto, {}).get('cumple', 0)
+                    for servicio in venta.get('servicios', []):
+                        if servicio == "PI":
+                            puntos += PUNTOS_PRODUCTO.get(tipo, {}).get("Pack Iberdrola (PI)", {}).get('cumple', 0)
+                        elif servicio == "UEN":
+                            puntos += PUNTOS_PRODUCTO.get(tipo, {}).get("UEN", {}).get('cumple', 0)
+                        elif servicio == "PMG":
+                            puntos += PUNTOS_PRODUCTO.get(tipo, {}).get("Pack Mantenimiento Gas (PMG)", {}).get('cumple', 0)
+                        elif servicio == "FE":
+                            puntos += PUNTOS_PRODUCTO.get(tipo, {}).get("Facturación Electrónica (FE)", {}).get('cumple', 0)
+                    total_puntos += puntos
+                else:
+                    total_puntos += venta.get('puntos', 0)
+    return total_puntos
+
+def calcular_puntos_pendientes(username, datos):
+    puntos_generados = 0
+    ventas_agente = datos['ventas'].get(username, {})
+    objetivos_globales = datos.get('objetivos_cumplidos', {})
+    
+    for fecha in ventas_agente.keys():
+        mes_str = fecha[:7]
+        mes_cumplido = objetivos_globales.get(mes_str, False)
+        for venta in ventas_agente[fecha]:
+            if mes_cumplido:
+                producto = venta.get('producto', '')
+                tipo = venta.get('tipo', 'CAPTA')
+                puntos = PUNTOS_PRODUCTO.get(tipo, {}).get(producto, {}).get('cumple', 0)
+                for servicio in venta.get('servicios', []):
+                    if servicio == "PI":
+                        puntos += PUNTOS_PRODUCTO.get(tipo, {}).get("Pack Iberdrola (PI)", {}).get('cumple', 0)
+                    elif servicio == "UEN":
+                        puntos += PUNTOS_PRODUCTO.get(tipo, {}).get("UEN", {}).get('cumple', 0)
+                    elif servicio == "PMG":
+                        puntos += PUNTOS_PRODUCTO.get(tipo, {}).get("Pack Mantenimiento Gas (PMG)", {}).get('cumple', 0)
+                    elif servicio == "FE":
+                        puntos += PUNTOS_PRODUCTO.get(tipo, {}).get("Facturación Electrónica (FE)", {}).get('cumple', 0)
+                puntos_generados += puntos
+            else:
+                puntos_generados += venta.get('puntos', 0)
+    
+    puntos_extra_agente = datos['puntos_extra'].get(username, {})
+    for fecha, extras in puntos_extra_agente.items():
+        if isinstance(extras, list):
+            puntos_generados += sum(e.get('puntos', 0) for e in extras)
+        elif isinstance(extras, dict):
+            puntos_generados += extras.get('puntos', 0)
+    
+    pagos_agente = datos['pagos_realizados'].get(username, [])
+    puntos_pagados = sum(p.get('puntos_pagados', 0) for p in pagos_agente)
+    return puntos_generados - puntos_pagados
+
+def obtener_datos_agente_periodo(registro, username, fecha_inicio, fecha_fin):
+    """
+    Obtiene los datos consolidados de un agente en un período desde la tabla central.
+    Retorna: { ventas, llamadas_5m, llamadas_15m, dias_ausente }
+    """
+    resultado = {
+        'ventas': 0,
+        'llamadas_5m': 0,
+        'llamadas_15m': 0,
+        'dias_ausente': 0
+    }
+    
+    for fecha, agentes in registro.items():
+        if fecha_inicio <= fecha <= fecha_fin:
+            if username in agentes:
+                datos_dia = agentes[username]
+                resultado['ventas'] += datos_dia.get('ventas', 0)
+                resultado['llamadas_5m'] += datos_dia.get('llamadas_5m', 0)
+                resultado['llamadas_15m'] += datos_dia.get('llamadas_15m', 0)
+                if datos_dia.get('ausente', False):
+                    resultado['dias_ausente'] += 1
+    
+    return resultado
+
+# =============================================
+# PANEL PRINCIPAL DEL SUPERVISOR
+# =============================================
+
+def show_mi_equipo():
+    st.title("👥 Mi Equipo - Panel de Supervisor")
+    
+    um = st.session_state.user_manager
+    supervisor = st.session_state.user['username']
+    mis_agentes = um.get_agents_by_manager(supervisor)
+    
+    if not mis_agentes:
+        st.info("No tienes agentes asignados actualmente.")
+        return
+    
+    st.write(f"👤 Supervisor: **{supervisor}** | Agentes a cargo: **{len(mis_agentes)}**")
+    
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+        "📊 Vista General",
+        "📈 Registrar Ventas",
+        "⭐ Puntos",
+        "✅ Cumplir Objetivo",
+        "💰 Cierres de Puntos"
+    ])
+    
+    datos_puntos = cargar_datos_puntos()
+    mes_actual = datetime.now().strftime('%Y-%m')
+    
+    # =============================================
+    # TAB 1: VISTA GENERAL (USA TABLA CENTRAL)
+    # =============================================
+    with tab1:
+        st.subheader("📊 Vista General del Equipo")
+        
+        registro = cargar_registro_diario()
+        
+        col_f1, col_f2 = st.columns(2)
+        with col_f1:
+            periodo = st.selectbox("Período:", ["Día específico", "Semana anterior (L-V)", "Mes actual"], key="periodo_vista")
+        with col_f2:
+            hoy = datetime.now()
+            if periodo == "Día específico":
+                fecha_dia = st.date_input("Selecciona el día:", value=hoy, key="fecha_dia_vista")
+                fecha_inicio = fecha_dia.strftime('%Y-%m-%d')
+                fecha_fin = fecha_dia.strftime('%Y-%m-%d')
+                st.write(f"📅 {fecha_inicio}")
+            elif periodo == "Semana anterior (L-V)":
+                lunes_anterior = hoy - timedelta(days=hoy.weekday() + 7)
+                viernes_anterior = lunes_anterior + timedelta(days=4)
+                fecha_inicio = lunes_anterior.strftime('%Y-%m-%d')
+                fecha_fin = viernes_anterior.strftime('%Y-%m-%d')
+                st.write(f"📅 {fecha_inicio} → {fecha_fin}")
+            else:
+                fecha_inicio = hoy.strftime('%Y-%m') + '-01'
+                fecha_fin = obtener_fecha_hoy()
+                st.write(f"📅 {hoy.strftime('%B %Y')}")
+        
+        data_agentes = []
+        for agente in mis_agentes:
+            username = agente['username']
+            
+            # Obtener datos consolidados de la tabla central
+            datos_periodo = obtener_datos_agente_periodo(registro, username, fecha_inicio, fecha_fin)
+            
+            sph_target = agente.get('sph_config', {}).get('target', 0.06)
+            schedule = agente.get('schedule', {})
+            horas_diarias = schedule.get('daily_hours', 6.0)
+            
+            # Calcular días laborables
+            if periodo == "Día específico":
+                dias_laborables = 1 if fecha_dia.weekday() < 5 else 0
+            elif periodo == "Semana anterior (L-V)":
+                dias_laborables = 5
+            else:
+                dias_laborables = 0
+                for d in range(1, hoy.day + 1):
+                    fecha = datetime(hoy.year, hoy.month, d)
+                    if fecha.weekday() < 5:
+                        dias_laborables += 1
+            
+            # Días efectivos (descontando ausencias)
+            dias_efectivos = max(0, dias_laborables - datos_periodo['dias_ausente'])
+            horas_totales = horas_diarias * dias_efectivos
+            
+            # SPH real
+            ventas_periodo = datos_periodo['ventas']
+            sph_real = round(ventas_periodo / (horas_totales * 0.83), 2) if ventas_periodo > 0 and horas_totales > 0 else 0.0
+            
+            # Ventas del mes (desde puntos_agentes.json)
+            ventas_mes = 0
+            ventas_agente_puntos = datos_puntos['ventas'].get(username, {})
+            mes_actual_str = hoy.strftime('%Y-%m')
+            for fecha, ventas_dia in ventas_agente_puntos.items():
+                if fecha.startswith(mes_actual_str):
+                    ventas_mes += len(ventas_dia)
+            
+            data_agentes.append({
+                'Agente': username,
+                'Nombre': agente.get('nombre', ''),
+                'Campaña': agente.get('campaign', ''),
+                'SPH Obj': sph_target,
+                'SPH Real': sph_real,
+                'Ventas Período': ventas_periodo,
+                'Ventas Mes': ventas_mes,
+                'Llamadas +5m': datos_periodo['llamadas_5m'],
+                'Llamadas +15m': datos_periodo['llamadas_15m'],
+                'Días Ausente': datos_periodo['dias_ausente'],
+                'Estado SPH': '🟢' if sph_real >= sph_target else '🔴'
+            })
+        
+        df = pd.DataFrame(data_agentes)
+        columnas_mostrar = ['Agente', 'Nombre', 'Campaña', 'SPH Obj', 'SPH Real', 'Estado SPH',
+                           'Ventas Período', 'Ventas Mes', 'Llamadas +5m', 'Llamadas +15m', 'Días Ausente']
+        st.dataframe(df[columnas_mostrar], use_container_width=True, hide_index=True)
+        
+        # Métricas rápidas
+        st.markdown("---")
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("Total Ventas Período", sum(d['Ventas Período'] for d in data_agentes))
+        with col2:
+            st.metric("Total Ventas Mes", sum(d['Ventas Mes'] for d in data_agentes))
+        with col3:
+            agentes_verdes = sum(1 for d in data_agentes if d['SPH Real'] >= d['SPH Obj'])
+            st.metric("Agentes 🟢 SPH", agentes_verdes)
+        with col4:
+            # Calcular SPH global del equipo (ventas totales / horas totales * 0.83)
+            total_ventas_equipo = sum(d['Ventas Período'] for d in data_agentes)
+            total_horas_equipo = 0
+            for agente in mis_agentes:
+                username = agente['username']
+                schedule = agente.get('schedule', {})
+                horas_diarias = schedule.get('daily_hours', 6.0)
+                datos_periodo = obtener_datos_agente_periodo(registro, username, fecha_inicio, fecha_fin)
+                
+                if periodo == "Día específico":
+                    dias_lab = 1 if fecha_dia.weekday() < 5 else 0
+                elif periodo == "Semana anterior (L-V)":
+                    dias_lab = 5
+                else:
+                    dias_lab = sum(1 for d in range(1, hoy.day + 1) if datetime(hoy.year, hoy.month, d).weekday() < 5)
+                
+                dias_efectivos = max(0, dias_lab - datos_periodo['dias_ausente'])
+                total_horas_equipo += horas_diarias * dias_efectivos
+            
+            sph_global = round(total_ventas_equipo / (total_horas_equipo * 0.83), 2) if total_horas_equipo > 0 else 0.0
+            st.metric("SPH Global Equipo", sph_global)
+        
+        # =============================================
+        # GESTIONAR AUSENTES Y LLAMADAS DEL DÍA
+        # =============================================
+        st.markdown("---")
+        st.subheader("✏️ Gestionar Día a Día")
+        
+        fecha_gestion = st.date_input("Fecha a gestionar:", value=hoy, key="fecha_gestion_dia")
+        fecha_g_str = fecha_gestion.strftime('%Y-%m-%d')
+        
+        # Cargar datos del día actual
+        registro = cargar_registro_diario()
+        datos_hoy = registro.get(fecha_g_str, {})
+        
+        st.write(f"Gestionando: **{fecha_g_str}**")
+        
+        cambios = False
+        
+        for agente in mis_agentes:
+            username = agente['username']
+            nombre = agente.get('nombre', username)
+            
+            agente_hoy = datos_hoy.get(username, {
+                'ventas': 0,
+                'llamadas_5m': 0,
+                'llamadas_15m': 0,
+                'ausente': False
+            })
+            
+            esta_ausente = agente_hoy.get('ausente', False)
+            estado = "🔴 AUSENTE" if esta_ausente else "🟢 PRESENTE"
+            
+            with st.expander(f"{estado} | {nombre} ({username})", expanded=False):
+                col_a1, col_a2, col_a3, col_a4 = st.columns(4)
+                
+                with col_a1:
+                    ausente = st.checkbox(
+                        "🔴 Ausente",
+                        value=esta_ausente,
+                        key=f"ausente_{username}_{fecha_g_str}"
+                    )
+                    if ausente != esta_ausente:
+                        agente_hoy['ausente'] = ausente
+                        cambios = True
+                
+                with col_a2:
+                    ventas_dia = st.number_input(
+                        "📦 Ventas",
+                        min_value=0,
+                        value=int(agente_hoy.get('ventas', 0)),
+                        step=1,
+                        key=f"ventas_dia_{username}_{fecha_g_str}"
+                    )
+                    if ventas_dia != agente_hoy.get('ventas', 0):
+                        agente_hoy['ventas'] = ventas_dia
+                        cambios = True
+                
+                with col_a3:
+                    llamadas_5m = st.number_input(
+                        "📞 +5min",
+                        min_value=0,
+                        value=int(agente_hoy.get('llamadas_5m', 0)),
+                        step=1,
+                        key=f"llamadas5m_{username}_{fecha_g_str}"
+                    )
+                    if llamadas_5m != agente_hoy.get('llamadas_5m', 0):
+                        agente_hoy['llamadas_5m'] = llamadas_5m
+                        cambios = True
+                
+                with col_a4:
+                    llamadas_15m = st.number_input(
+                        "📞 +15min",
+                        min_value=0,
+                        value=int(agente_hoy.get('llamadas_15m', 0)),
+                        step=1,
+                        key=f"llamadas15m_{username}_{fecha_g_str}"
+                    )
+                    if llamadas_15m != agente_hoy.get('llamadas_15m', 0):
+                        agente_hoy['llamadas_15m'] = llamadas_15m
+                        cambios = True
+                
+                if cambios:
+                    datos_hoy[username] = agente_hoy
+        
+        if st.button("💾 Guardar Todo", type="primary", use_container_width=True, key="btn_guardar_gestion"):
+            registro[fecha_g_str] = datos_hoy
+            guardar_registro_diario(registro)
+            st.success("✅ Datos guardados correctamente")
+            st.rerun()
+    
+    # =============================================
+    # TAB 2: REGISTRAR VENTAS (CON DETALLE DE PUNTOS)
+    # =============================================
+    with tab2:
+        st.subheader("📈 Registrar Ventas del Día")
+        
+        fecha_venta = st.date_input("Fecha:", value=datetime.now(), key="fecha_venta")
+        fecha_str = fecha_venta.strftime('%Y-%m-%d')
+        
+        st.write(f"📅 Registrando ventas para: **{fecha_str}**")
+        st.markdown("---")
+        
+        agentes_dict = {a['username']: a.get('nombre', a['username']) for a in mis_agentes}
+        agente_sel = st.selectbox(
+            "Agente:",
+            list(agentes_dict.keys()),
+            format_func=lambda x: f"{x} ({agentes_dict[x]})"
+        )
+        
+        # Ventas detalladas (puntos)
+        ventas_hoy = datos_puntos['ventas'].get(agente_sel, {}).get(fecha_str, [])
+        if ventas_hoy:
+            st.write("**📋 Ventas registradas hoy (detalle puntos):**")
+            for i, v in enumerate(ventas_hoy):
+                with st.container():
+                    col_v1, col_v2, col_v3, col_v4, col_v5 = st.columns([2, 2, 1, 1, 1])
+                    with col_v1:
+                        st.write(f"**{v.get('producto', '')}**")
+                    with col_v2:
+                        servicios = v.get('servicios', [])
+                        if servicios:
+                            st.write(f"+ {' + '.join(servicios)}")
+                        else:
+                            st.write("-")
+                    with col_v3:
+                        st.write(f"{v.get('puntos', 0)} pts")
+                    with col_v4:
+                        if st.button("✏️", key=f"edit_venta_{i}"):
+                            st.session_state.editing_venta = {
+                                'agente': agente_sel,
+                                'fecha': fecha_str,
+                                'index': i,
+                                'venta': v
+                            }
+                            st.rerun()
+                    with col_v5:
+                        if st.button("🗑️", key=f"del_venta_{i}"):
+                            ventas_hoy.pop(i)
+                            if not ventas_hoy:
+                                del datos_puntos['ventas'][agente_sel][fecha_str]
+                            else:
+                                datos_puntos['ventas'][agente_sel][fecha_str] = ventas_hoy
+                            guardar_datos_puntos(datos_puntos)
+                            # Actualizar también la tabla central
+                            registro = cargar_registro_diario()
+                            if fecha_str in registro and agente_sel in registro[fecha_str]:
+                                registro[fecha_str][agente_sel]['ventas'] = max(0, registro[fecha_str][agente_sel].get('ventas', 0) - 1)
+                                guardar_registro_diario(registro)
+                            st.success("✅ Venta eliminada")
+                            st.rerun()
+                    st.markdown("---")
+        
+        # Editar venta
+        if 'editing_venta' in st.session_state and st.session_state.editing_venta:
+            ev = st.session_state.editing_venta
+            if ev['agente'] == agente_sel and ev['fecha'] == fecha_str:
+                st.warning(f"✏️ Editando venta #{ev['index']+1}: {ev['venta'].get('producto', '')}")
+                
+                col_e1, col_e2 = st.columns(2)
+                with col_e1:
+                    prod_edit = st.selectbox("Producto:", PRODUCTOS,
+                        index=PRODUCTOS.index(ev['venta'].get('producto', 'Electricidad')) if ev['venta'].get('producto', 'Electricidad') in PRODUCTOS else 0,
+                        key="edit_producto")
+                with col_e2:
+                    tipo_edit = st.selectbox("Tipo:", TIPOS_VENTA,
+                        index=TIPOS_VENTA.index(ev['venta'].get('tipo', 'CAPTA')) if ev['venta'].get('tipo', 'CAPTA') in TIPOS_VENTA else 0,
+                        key="edit_tipo")
+                
+                servicios_actuales = ev['venta'].get('servicios', [])
+                st.write("**Servicios asociados:**")
+                col_s1, col_s2, col_s3, col_s4 = st.columns(4)
+                with col_s1:
+                    pi_edit = st.checkbox("Pack Iberdrola (PI)", value="PI" in servicios_actuales, key="edit_pi")
+                with col_s2:
+                    uen_edit = st.checkbox("UEN", value="UEN" in servicios_actuales, key="edit_uen", disabled=pi_edit)
+                with col_s3:
+                    pmg_edit = st.checkbox("PMG", value="PMG" in servicios_actuales, key="edit_pmg", disabled=prod_edit not in ["Gas"])
+                with col_s4:
+                    fe_edit = st.checkbox("FE", value="FE" in servicios_actuales, key="edit_fe")
+                
+                if st.button("💾 Guardar Cambios", type="primary"):
+                    puntos = PUNTOS_PRODUCTO[tipo_edit][prod_edit]["no_cumple"]
+                    nuevos_servicios = []
+                    if pi_edit:
+                        nuevos_servicios.append("PI")
+                        puntos += PUNTOS_PRODUCTO[tipo_edit]["Pack Iberdrola (PI)"]["no_cumple"]
+                    if uen_edit and not pi_edit:
+                        nuevos_servicios.append("UEN")
+                        puntos += PUNTOS_PRODUCTO[tipo_edit]["UEN"]["no_cumple"]
+                    if pmg_edit and prod_edit == "Gas":
+                        nuevos_servicios.append("PMG")
+                        puntos += PUNTOS_PRODUCTO[tipo_edit]["Pack Mantenimiento Gas (PMG)"]["no_cumple"]
+                    if fe_edit:
+                        nuevos_servicios.append("FE")
+                        puntos += PUNTOS_PRODUCTO[tipo_edit]["Facturación Electrónica (FE)"]["no_cumple"]
+                    
+                    datos_puntos['ventas'][agente_sel][fecha_str][ev['index']] = {
+                        "producto": prod_edit,
+                        "tipo": tipo_edit,
+                        "servicios": nuevos_servicios,
+                        "puntos": puntos
+                    }
+                    guardar_datos_puntos(datos_puntos)
+                    st.session_state.pop('editing_venta')
+                    st.success("✅ Venta actualizada")
+                    st.rerun()
+                
+                if st.button("❌ Cancelar Edición"):
+                    st.session_state.pop('editing_venta')
+                    st.rerun()
+        
+        # Nueva venta
+        if 'editing_venta' not in st.session_state or st.session_state.editing_venta.get('agente') != agente_sel:
+            st.markdown("---")
+            st.write("**➕ Nueva Venta:**")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                producto = st.selectbox("Producto principal:", PRODUCTOS, key="nuevo_producto")
+            with col2:
+                tipo_venta = st.selectbox("Tipo de cliente:", TIPOS_VENTA, key="nuevo_tipo")
+            
+            st.write("**Servicios asociados (opcionales):**")
+            col_s1, col_s2, col_s3, col_s4 = st.columns(4)
+            with col_s1:
+                add_pi = st.checkbox("Pack Iberdrola (PI)", value=False, key="add_pi")
+            with col_s2:
+                add_uen = st.checkbox("UEN", value=False, key="add_uen", disabled=add_pi)
+            with col_s3:
+                add_pmg = st.checkbox("PMG", value=False, key="add_pmg", disabled=producto != "Gas")
+            with col_s4:
+                add_fe = st.checkbox("Factura Electrónica (FE)", value=False, key="add_fe")
+            
+            puntos = PUNTOS_PRODUCTO[tipo_venta][producto]["no_cumple"]
+            servicios = []
+            if add_pi:
+                servicios.append("PI")
+                puntos += PUNTOS_PRODUCTO[tipo_venta]["Pack Iberdrola (PI)"]["no_cumple"]
+            if add_uen and not add_pi:
+                servicios.append("UEN")
+                puntos += PUNTOS_PRODUCTO[tipo_venta]["UEN"]["no_cumple"]
+            if add_pmg and producto == "Gas":
+                servicios.append("PMG")
+                puntos += PUNTOS_PRODUCTO[tipo_venta]["Pack Mantenimiento Gas (PMG)"]["no_cumple"]
+            if add_fe:
+                servicios.append("FE")
+                puntos += PUNTOS_PRODUCTO[tipo_venta]["Facturación Electrónica (FE)"]["no_cumple"]
+            
+            st.info(f"**Puntos totales: {puntos} pts**")
+            
+            if st.button("➕ Añadir Venta", type="primary", use_container_width=True):
+                nueva_venta = {
+                    "producto": producto,
+                    "tipo": tipo_venta,
+                    "servicios": servicios,
+                    "puntos": puntos
+                }
+                
+                if agente_sel not in datos_puntos['ventas']:
+                    datos_puntos['ventas'][agente_sel] = {}
+                if fecha_str not in datos_puntos['ventas'][agente_sel]:
+                    datos_puntos['ventas'][agente_sel][fecha_str] = []
+                
+                datos_puntos['ventas'][agente_sel][fecha_str].append(nueva_venta)
+                guardar_datos_puntos(datos_puntos)
+                
+                # Actualizar también la tabla central (ventas del día)
+                registro = cargar_registro_diario()
+                if fecha_str not in registro:
+                    registro[fecha_str] = {}
+                if agente_sel not in registro[fecha_str]:
+                    registro[fecha_str][agente_sel] = {'ventas': 0, 'llamadas_5m': 0, 'llamadas_15m': 0, 'ausente': False}
+                registro[fecha_str][agente_sel]['ventas'] = registro[fecha_str][agente_sel].get('ventas', 0) + 1
+                guardar_registro_diario(registro)
+                
+                st.success(f"✅ Venta añadida: {producto} = {puntos} pts")
+                st.rerun()
+    
+    # =============================================
+    # TAB 3: PUNTOS
+    # =============================================
+    with tab3:
+        st.subheader("⭐ Puntos del Equipo")
+        
+        subtab1, subtab2 = st.tabs(["📊 Ver Puntos", "➕ Añadir Puntos Extra"])
+        
+        with subtab1:
+            col_p1, col_p2 = st.columns(2)
+            with col_p1:
+                periodo_puntos = st.selectbox("Período:", ["Semana actual (L-V)", "Mes actual", "Mes anterior"], key="periodo_puntos")
+            with col_p2:
+                hoy = datetime.now()
+                if periodo_puntos == "Semana actual (L-V)":
+                    lunes_actual = hoy - timedelta(days=hoy.weekday())
+                    viernes_actual = lunes_actual + timedelta(days=4)
+                    fecha_inicio_p = lunes_actual.strftime('%Y-%m-%d')
+                    fecha_fin_p = viernes_actual.strftime('%Y-%m-%d')
+                    st.write(f"📅 {fecha_inicio_p} → {fecha_fin_p}")
+                elif periodo_puntos == "Mes actual":
+                    fecha_inicio_p = hoy.strftime('%Y-%m') + '-01'
+                    fecha_fin_p = hoy.strftime('%Y-%m-%d')
+                    st.write(f"📅 {hoy.strftime('%B %Y')}")
+                else:
+                    if hoy.month == 1:
+                        mes_anterior = 12
+                        año_anterior = hoy.year - 1
+                    else:
+                        mes_anterior = hoy.month - 1
+                        año_anterior = hoy.year
+                    fecha_inicio_p = f"{año_anterior}-{mes_anterior:02d}-01"
+                    ultimo_dia = monthrange(año_anterior, mes_anterior)[1]
+                    fecha_fin_p = f"{año_anterior}-{mes_anterior:02d}-{ultimo_dia}"
+                    st.write(f"📅 {datetime(año_anterior, mes_anterior, 1).strftime('%B %Y')}")
+            
+            data_puntos = []
+            for agente in mis_agentes:
+                username = agente['username']
+                ventas_agente = datos_puntos['ventas'].get(username, {})
+                
+                puntos_ventas = 0
+                for fecha, ventas_dia in ventas_agente.items():
+                    if fecha_inicio_p <= fecha <= fecha_fin_p:
+                        for venta in ventas_dia:
+                            puntos_ventas += venta.get('puntos', 0)
+                
+                puntos_extra_periodo = 0
+                extras_agente = datos_puntos['puntos_extra'].get(username, {})
+                for fecha, extras in extras_agente.items():
+                    if fecha_inicio_p <= fecha <= fecha_fin_p:
+                        if isinstance(extras, list):
+                            puntos_extra_periodo += sum(e.get('puntos', 0) for e in extras)
+                        elif isinstance(extras, dict):
+                            puntos_extra_periodo += extras.get('puntos', 0)
+                
+                total_periodo = puntos_ventas + puntos_extra_periodo
+                puntos_pend = calcular_puntos_pendientes(username, datos_puntos)
+                
+                data_puntos.append({
+                    'Agente': username,
+                    'Nombre': agente.get('nombre', ''),
+                    'Puntos Ventas': puntos_ventas,
+                    'Puntos Extra': puntos_extra_periodo,
+                    'Total Período': total_periodo,
+                    'Pendientes Pago': puntos_pend
+                })
+            
+            df_puntos = pd.DataFrame(data_puntos)
+            st.dataframe(df_puntos, use_container_width=True, hide_index=True)
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Total Puntos Período", sum(d['Total Período'] for d in data_puntos))
+            with col2:
+                st.metric("Total Pendiente Pago", sum(d['Pendientes Pago'] for d in data_puntos))
+            with col3:
+                st.metric("Agentes con Puntos", sum(1 for d in data_puntos if d['Total Período'] > 0))
+        
+        with subtab2:
+            st.write("### ⭐ Añadir Puntos Extra Manuales")
+            st.caption("Para puntos por formaciones, concursos, rendimiento excepcional, etc.")
+            
+            col_a1, col_a2 = st.columns(2)
+            with col_a1:
+                fecha_extra = st.date_input("Fecha:", value=datetime.now(), key="fecha_extra")
+                fecha_str = fecha_extra.strftime('%Y-%m-%d')
+            with col_a2:
+                agente_extra = st.selectbox("Agente:", [a['username'] for a in mis_agentes],
+                    format_func=lambda x: f"{x} ({next((a.get('nombre', x) for a in mis_agentes if a['username'] == x), x)})",
+                    key="agente_extra")
+            
+            col_b1, col_b2 = st.columns(2)
+            with col_b1:
+                puntos_extra = st.number_input("Puntos:", min_value=0, value=0, step=5, key="puntos_extra_input")
+            with col_b2:
+                motivo_extra = st.text_input("Motivo:", placeholder="Ej: Mejor agente del día, Formación...", key="motivo_extra")
+            
+            if st.button("⭐ Añadir Puntos Extra", type="primary", use_container_width=True):
+                if puntos_extra > 0 and motivo_extra:
+                    if agente_extra not in datos_puntos['puntos_extra']:
+                        datos_puntos['puntos_extra'][agente_extra] = {}
+                    if fecha_str not in datos_puntos['puntos_extra'][agente_extra]:
+                        datos_puntos['puntos_extra'][agente_extra][fecha_str] = []
+                    datos_puntos['puntos_extra'][agente_extra][fecha_str].append({
+                        "puntos": puntos_extra,
+                        "motivo": motivo_extra
+                    })
+                    guardar_datos_puntos(datos_puntos)
+                    st.success(f"✅ {puntos_extra} pts añadidos a {agente_extra}")
+                    st.rerun()
+                else:
+                    st.error("❌ Indica los puntos y el motivo")
+            
+            st.markdown("---")
+            st.write("### 📋 Últimos Puntos Extra")
+            todos_extras = []
+            for agente in mis_agentes:
+                username = agente['username']
+                for fecha, extras in datos_puntos['puntos_extra'].get(username, {}).items():
+                    if isinstance(extras, list):
+                        for e in extras:
+                            todos_extras.append({'Fecha': fecha, 'Agente': username, 'Puntos': e.get('puntos', 0), 'Motivo': e.get('motivo', '')})
+            if todos_extras:
+                todos_extras.sort(key=lambda x: x['Fecha'], reverse=True)
+                st.dataframe(pd.DataFrame(todos_extras[:20]), use_container_width=True, hide_index=True)
+            else:
+                st.info("No hay puntos extra registrados.")
+    
+    # =============================================
+    # TAB 4: CUMPLIR OBJETIVO
+    # =============================================
+    with tab4:
+        st.subheader("✅ Cumplir Objetivo Mensual")
+        st.caption("Marca un mes como cumplido. Se calculará la diferencia de puntos para TODOS los agentes y se añadirá como puntos extra automáticamente.")
+        
+        todos_meses = set()
+        for agente in mis_agentes:
+            ventas_agente = datos_puntos['ventas'].get(agente['username'], {})
+            todos_meses.update(obtener_meses_con_ventas(ventas_agente))
+        meses_disponibles = sorted(todos_meses, reverse=True)
+        
+        if not meses_disponibles:
+            st.info("No hay ventas registradas todavía.")
+        else:
+            mes_a_cumplir = st.selectbox("Selecciona el mes:", meses_disponibles, key="mes_cumplir")
+            objetivos_globales = datos_puntos.get('objetivos_cumplidos', {})
+            mes_cumplido = objetivos_globales.get(mes_a_cumplir, False)
+            
+            if mes_cumplido:
+                st.success(f"✅ {mes_a_cumplir} ya está marcado como CUMPLIDO")
+                if st.button("❌ Desmarcar como cumplido", type="secondary"):
+                    datos_puntos['objetivos_cumplidos'][mes_a_cumplir] = False
+                    guardar_datos_puntos(datos_puntos)
+                    st.warning("⚠️ Mes desmarcado. Los puntos extra generados NO se eliminan automáticamente.")
+                    st.rerun()
+            else:
+                total_diferencia = 0
+                agentes_afectados = []
+                for agente in mis_agentes:
+                    username = agente['username']
+                    ventas_agente = datos_puntos['ventas'].get(username, {})
+                    if ventas_agente:
+                        puntos_no = calcular_puntos_agente_mes(ventas_agente, mes_a_cumplir, False)
+                        puntos_si = calcular_puntos_agente_mes(ventas_agente, mes_a_cumplir, True)
+                        diferencia = puntos_si - puntos_no
+                        if diferencia > 0:
+                            agentes_afectados.append({'agente': username, 'puntos_actuales': puntos_no, 'puntos_cumplido': puntos_si, 'diferencia': diferencia})
+                            total_diferencia += diferencia
+                
+                if agentes_afectados:
+                    st.info(f"📊 **Total a repartir: +{total_diferencia} puntos** entre {len(agentes_afectados)} agentes")
+                    for a in agentes_afectados:
+                        st.write(f"- **{a['agente']}**: {a['puntos_actuales']} → {a['puntos_cumplido']} pts (+{a['diferencia']})")
+                    
+                    if st.button(f"✅ Marcar {mes_a_cumplir} como CUMPLIDO", type="primary", use_container_width=True):
+                        if 'objetivos_cumplidos' not in datos_puntos:
+                            datos_puntos['objetivos_cumplidos'] = {}
+                        datos_puntos['objetivos_cumplidos'][mes_a_cumplir] = True
+                        fecha_hoy = obtener_fecha_hoy()
+                        for a in agentes_afectados:
+                            if a['agente'] not in datos_puntos['puntos_extra']:
+                                datos_puntos['puntos_extra'][a['agente']] = {}
+                            if fecha_hoy not in datos_puntos['puntos_extra'][a['agente']]:
+                                datos_puntos['puntos_extra'][a['agente']][fecha_hoy] = []
+                            datos_puntos['puntos_extra'][a['agente']][fecha_hoy].append({
+                                "puntos": a['diferencia'],
+                                "motivo": f"Por objetivo de campaña cumplido - {mes_a_cumplir}"
+                            })
+                        guardar_datos_puntos(datos_puntos)
+                        st.success(f"✅ ¡{mes_a_cumplir} marcado como CUMPLIDO! +{total_diferencia} pts repartidos.")
+                        st.rerun()
+                else:
+                    st.info(f"No hay agentes con ventas en {mes_a_cumplir}")
+    
+    # =============================================
+    # TAB 5: CIERRES DE PUNTOS
+    # =============================================
+    with tab5:
+        st.subheader("💰 Gestión de Pagos de Puntos")
+        st.write("### 📊 Saldo de Puntos por Agente")
+        
+        col_f1, col_f2 = st.columns(2)
+        with col_f1:
+            periodo_pago = st.selectbox("Período:", ["Semana actual (L-V)", "Semana anterior (L-V)", "Mes actual", "Mes anterior"], key="periodo_pago")
+        with col_f2:
+            hoy = datetime.now()
+            if periodo_pago == "Semana actual (L-V)":
+                lunes = hoy - timedelta(days=hoy.weekday())
+                viernes = lunes + timedelta(days=4)
+                fecha_ini = lunes.strftime('%Y-%m-%d')
+                fecha_fin = viernes.strftime('%Y-%m-%d')
+                st.write(f"📅 {fecha_ini} → {fecha_fin}")
+            elif periodo_pago == "Semana anterior (L-V)":
+                lunes = hoy - timedelta(days=hoy.weekday() + 7)
+                viernes = lunes + timedelta(days=4)
+                fecha_ini = lunes.strftime('%Y-%m-%d')
+                fecha_fin = viernes.strftime('%Y-%m-%d')
+                st.write(f"📅 {fecha_ini} → {fecha_fin}")
+            elif periodo_pago == "Mes actual":
+                fecha_ini = hoy.strftime('%Y-%m') + '-01'
+                fecha_fin = hoy.strftime('%Y-%m-%d')
+                st.write(f"📅 {hoy.strftime('%B %Y')}")
+            else:
+                if hoy.month == 1:
+                    mes_ant, año_ant = 12, hoy.year - 1
+                else:
+                    mes_ant, año_ant = hoy.month - 1, hoy.year
+                fecha_ini = f"{año_ant}-{mes_ant:02d}-01"
+                fecha_fin = f"{año_ant}-{mes_ant:02d}-{monthrange(año_ant, mes_ant)[1]}"
+                st.write(f"📅 {datetime(año_ant, mes_ant, 1).strftime('%B %Y')}")
+        
+        data_saldo = []
+        for agente in mis_agentes:
+            username = agente['username']
+            puntos_gen = 0
+            ventas_agente = datos_puntos['ventas'].get(username, {})
+            for fecha, ventas_dia in ventas_agente.items():
+                if fecha_ini <= fecha <= fecha_fin:
+                    for venta in ventas_dia:
+                        puntos_gen += venta.get('puntos', 0)
+            extras_agente = datos_puntos['puntos_extra'].get(username, {})
+            for fecha, extras in extras_agente.items():
+                if fecha_ini <= fecha <= fecha_fin:
+                    if isinstance(extras, list):
+                        puntos_gen += sum(e.get('puntos', 0) for e in extras)
+                    elif isinstance(extras, dict):
+                        puntos_gen += extras.get('puntos', 0)
+            pagos_agente = datos_puntos['pagos_realizados'].get(username, [])
+            puntos_pagados = sum(p.get('puntos_pagados', 0) for p in pagos_agente if fecha_ini <= p.get('fecha', '') <= fecha_fin)
+            pendientes = calcular_puntos_pendientes(username, datos_puntos)
+            data_saldo.append({'Agente': username, 'Pendientes': pendientes, 'Pagados (período)': puntos_pagados, 'Generados (período)': puntos_gen})
+        
+        df_saldo = pd.DataFrame(data_saldo)[['Agente', 'Pendientes', 'Pagados (período)', 'Generados (período)']]
+        st.dataframe(df_saldo, use_container_width=True, hide_index=True)
+        
+        col1, col2, col3 = st.columns(3)
+        with col1: st.metric("Total Pendiente", sum(d['Pendientes'] for d in data_saldo))
+        with col2: st.metric("Total Pagado", sum(d['Pagados (período)'] for d in data_saldo))
+        with col3: st.metric("Total Generado", sum(d['Generados (período)'] for d in data_saldo))
+        
+        st.markdown("---")
+        st.write("### 💸 Liquidar Puntos Pendientes")
+        total_pendiente = sum(d['Pendientes'] for d in data_saldo)
+        
+        if total_pendiente > 0:
+            st.info(f"💡 Hay **{total_pendiente} puntos pendientes**")
+            col_b1, col_b2 = st.columns(2)
+            with col_b1:
+                semana_liq = st.text_input("Etiqueta:", value=f"{fecha_ini} → {fecha_fin}", key="semana_liq")
+            with col_b2:
+                nota_liq = st.text_input("Nota:", key="nota_liq")
+            
+            if st.button("💸 PAGAR TODOS LOS PENDIENTES", type="primary", use_container_width=True):
+                fecha_hoy_str = obtener_fecha_hoy()
+                for agente in mis_agentes:
+                    username = agente['username']
+                    pend = calcular_puntos_pendientes(username, datos_puntos)
+                    if pend > 0:
+                        if username not in datos_puntos['pagos_realizados']:
+                            datos_puntos['pagos_realizados'][username] = []
+                        datos_puntos['pagos_realizados'][username].append({
+                            "fecha": fecha_hoy_str, "puntos_pagados": pend,
+                            "semana": semana_liq, "nota": nota_liq
+                        })
+                guardar_datos_puntos(datos_puntos)
+                st.success(f"✅ Liquidación completada: {total_pendiente} pts pagados")
+                st.rerun()
+        else:
+            st.success("🎉 No hay puntos pendientes.")
+        
+        st.markdown("---")
+        st.write("### 🚨 Resetear Datos")
+        with st.expander("⚠️ Resetear todos los datos", expanded=False):
+            st.error("Esto borrará TODAS las ventas, puntos y registros.")
+            col_r1, col_r2 = st.columns(2)
+            with col_r1:
+                confirm = st.text_input("Escribe 'BORRAR TODO':", key="reset_confirm")
+            with col_r2:
+                st.write("")
+                if st.button("🗑️ RESETEAR TODO", disabled=(confirm != "BORRAR TODO")):
+                    guardar_datos_puntos({"ventas": {}, "objetivos_cumplidos": {}, "puntos_extra": {}, "pagos_realizados": {}})
+                    guardar_registro_diario({})
+                    st.success("✅ Datos reseteados")
+                    st.rerun()
