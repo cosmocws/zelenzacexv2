@@ -76,10 +76,6 @@ def login_screen():
                     else:
                         st.session_state.current_page = "home"
                     
-                    # Sincronizar datos después del login
-                    if st.session_state.github_sync:
-                        st.session_state.github_sync.sync_all_data_files()
-                    
                     st.rerun()
                 else:
                     st.error("Usuario o contraseña incorrectos")
@@ -168,8 +164,6 @@ def sidebar_navigation():
                                 {'password_hash': st.session_state.user_manager._hash_password(new_password)}
                             )
                             st.success("✅ Contraseña actualizada correctamente")
-                            if st.session_state.github_sync:
-                                st.session_state.github_sync.sync_all_data_files()
                         else:
                             st.error("Contraseña actual incorrecta")
         
