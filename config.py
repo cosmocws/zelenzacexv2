@@ -1,4 +1,4 @@
-# core/config.py
+# config.py
 """
 Configuracion central de la aplicacion Zelenza CEX v2.
 """
