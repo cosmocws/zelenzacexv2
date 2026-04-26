@@ -824,7 +824,7 @@
     "id_empleado": "363",
     "email": "",
     "campaign": "CAPTA",
-    "team": "Sin equipo",
+    "team": "Equipo Diego",
     "manager": "0012",
     "schedule": {
       "start_time": "15:00",
@@ -842,13 +842,17 @@
     },
     "managed_agents": [],
     "sph_config": {
-      "target": 0.06,
+      "target": 0.1,
       "enabled": true,
       "start_date": "2026-04-26",
       "history": [
         {
           "target": 0.06,
           "set_at": "2026-04-26T11:06:00.494345"
+        },
+        {
+          "target": 0.1,
+          "set_at": "2026-04-26T12:11:27.841413"
         }
       ]
     },
