@@ -1,5 +1,19 @@
 {
-    "ventas": {},
+    "ventas": {
+        "0613": {
+            "2026-04-24": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CROSS",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 91
+                }
+            ]
+        }
+    },
     "objetivos_cumplidos": {},
     "puntos_extra": {},
     "pagos_realizados": {}
