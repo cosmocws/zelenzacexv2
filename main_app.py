@@ -1,16 +1,15 @@
 # main_app.py
 import streamlit as st
 import os
-import time as _time
 from datetime import datetime
 
-# Importar nuestros módulos
+# Importar nuestros modulos
 from auth.user_manager import UserManager
-from config import STREAMLIT_CONFIG, USER_ROLES, DEFAULT_CAMPAIGN
-from github_sync import GitHubSync
+from core.config import STREAMLIT_CONFIG, USER_ROLES, DEFAULT_CAMPAIGN
+from core.github_sync import GitHubSync
 
 # ===========================================
-# CONFIGURACIÓN INICIAL DE STREAMLIT
+# CONFIGURACION INICIAL DE STREAMLIT
 # ===========================================
 st.set_page_config(
     page_title=STREAMLIT_CONFIG["page_title"],
@@ -20,17 +19,14 @@ st.set_page_config(
 )
 
 # ===========================================
-# INICIALIZACIÓN DE SERVICIOS
+# INICIALIZACION DE SERVICIOS
 # ===========================================
 @st.cache_resource
 def init_services():
-    """Inicializa los servicios principales de la aplicación."""
+    """Inicializa los servicios principales de la aplicacion."""
     user_manager = UserManager()
-    
-    # CREAR ADMIN POR DEFECTO SI NO EXISTE
     user_manager.initialize_default_admin()
     
-    # Intentar inicializar GitHub Sync (opcional, solo si hay token)
     github_sync = None
     try:
         if "GITHUB_TOKEN" in st.secrets:
@@ -48,9 +44,9 @@ def init_services():
 # FUNCIONES DE UI
 # ===========================================
 def login_screen():
-    """Pantalla de inicio de sesión."""
+    """Pantalla de inicio de sesion."""
     st.title("⚡ Zelenza CEX v2.0")
-    st.subheader("Iniciar Sesión")
+    st.subheader("Iniciar Sesion")
     
     col1, col2, col3 = st.columns([1, 2, 1])
     
@@ -58,7 +54,7 @@ def login_screen():
         with st.form("login_form"):
             username = st.text_input("Usuario", placeholder="Nombre de usuario")
             password = st.text_input("Contraseña", type="password", placeholder="Contraseña")
-            submit = st.form_submit_button("Iniciar Sesión", use_container_width=True)
+            submit = st.form_submit_button("Iniciar Sesion", use_container_width=True)
             
             if submit:
                 if not username or not password:
@@ -70,7 +66,7 @@ def login_screen():
                 if user:
                     st.session_state.user = user
                     st.session_state.logged_in = True
-                    # FORZAR CAMBIO DE CONTRASEÑA SI ES NECESARIO
+                    
                     if user.get('force_password_change', False):
                         st.session_state.current_page = "change_password"
                     else:
@@ -81,11 +77,11 @@ def login_screen():
                     st.error("Usuario o contraseña incorrectos")
 
 def sidebar_navigation():
-    """Barra lateral de navegación según el rol del usuario."""
+    """Barra lateral de navegacion segun el rol del usuario."""
     with st.sidebar:
         st.title("⚡ Zelenza CEX")
         
-        # --- BOTÓN DE REFRESCAR ---
+        # Boton de refrescar
         col_r1, col_r2 = st.columns([3, 1])
         with col_r2:
             if st.button("🔄", help="Refrescar datos", use_container_width=True):
@@ -96,7 +92,6 @@ def sidebar_navigation():
         user = st.session_state.user
         role = user['role']
         
-        # Mostrar información del usuario
         st.write(f"👤 **{user['username']}**")
         st.write(f"📋 Rol: **{USER_ROLES[role]['name']}**")
         
@@ -105,10 +100,8 @@ def sidebar_navigation():
         
         st.divider()
         
-        # Navegación común
         pages = ["🏠 Inicio"]
         
-        # Páginas específicas por rol
         if role == 'admin':
             pages.extend([
                 "👥 Gestión de Usuarios",
@@ -129,17 +122,16 @@ def sidebar_navigation():
                 "📅 Solicitar Ausencia"
             ])
         
-        # Selección de página
-        selected_page = st.radio("Navegación", pages, label_visibility="collapsed")
+        selected_page = st.radio("Navegacion", pages, label_visibility="collapsed")
         st.session_state.current_page = selected_page
         
         st.divider()
         
-        # Botón de cerrar sesión
-        if st.button("🚪 Cerrar Sesión", use_container_width=True):
+        if st.button("🚪 Cerrar Sesion", use_container_width=True):
             logout()
-            
+        
         st.divider()
+        
         with st.expander("🔒 Cambiar Contraseña"):
             with st.form("change_password_form"):
                 old_password = st.text_input("Contraseña actual", type="password")
@@ -152,93 +144,59 @@ def sidebar_navigation():
                     elif new_password != confirm_password:
                         st.error("Las contraseñas no coinciden")
                     else:
-                        # Verificar contraseña actual
                         user_check = st.session_state.user_manager.authenticate(
                             st.session_state.user['username'], 
                             old_password
                         )
                         if user_check:
-                            # Actualizar contraseña
                             st.session_state.user_manager.update_user(
                                 st.session_state.user['username'],
                                 {'password_hash': st.session_state.user_manager._hash_password(new_password)}
                             )
                             st.success("✅ Contraseña actualizada correctamente")
+                            from core.github_sync import sync_archivo
+                            sync_archivo("data/users.json")
                         else:
                             st.error("Contraseña actual incorrecta")
         
-        # Estado de sincronización
-        if st.session_state.github_sync:
-            sync_status = st.session_state.github_sync.get_sync_status()
+        # Estado Sync (SOLO ADMIN)
+        if role == 'admin':
             with st.expander("🔄 Estado Sync"):
-                if sync_status['last_sync']:
-                    st.write(f"Última: {sync_status['last_sync']['timestamp'][:19]}")
-                    st.write(f"Archivo: {sync_status['last_sync']['file']}")
+                gs = st.session_state.get('github_sync')
+                if gs:
+                    status = gs.get_sync_status()
+                    if status['last_sync']:
+                        st.write(f"Ultima: {status['last_sync']['time'][:19]}")
+                        st.write(f"Archivo: {status['last_sync']['file']}")
+                    st.write(f"Total: {status['total_syncs']}")
                 else:
-                    st.write("Sin sincronizaciones")
+                    st.write("Sync no configurado")
 
 def logout():
-    """Cierra la sesión del usuario."""
+    """Cierra la sesion del usuario."""
     for key in list(st.session_state.keys()):
         del st.session_state[key]
     st.rerun()
 
-def show_home():
-    """Página de inicio según el rol."""
-    st.title(f"Bienvenido, {st.session_state.user['username']}! 👋")
-    
-    role = st.session_state.user['role']
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.metric("Rol", USER_ROLES[role]['name'])
-        if role == 'agent':
-            st.metric("Campaña", st.session_state.user.get('campaign', 'No asignada'))
-            st.metric("Equipo", st.session_state.user.get('team', 'No asignado'))
-    
-    with col2:
-        st.metric("Último Acceso", datetime.now().strftime("%d/%m/%Y %H:%M"))
-        if role == 'super':
-            agentes = st.session_state.user.get('managed_agents', [])
-            st.metric("Agentes Asignados", len(agentes))
-    
-    st.divider()
-    st.info("🚀 Sistema en construcción. Próximamente más funcionalidades.")
-
 def show_under_construction():
-    """Página en construcción."""
-    st.title("🚧 En Construcción")
-    st.info("Esta sección estará disponible próximamente.")
+    st.title("🚧 En Construccion")
+    st.info("Esta seccion estara disponible proximamente.")
 
 # ===========================================
-# APLICACIÓN PRINCIPAL
+# APLICACION PRINCIPAL
 # ===========================================
 def main():
     """Punto de entrada principal de la aplicacion."""
     
-    # Inicializar servicios si no existen
     if 'user_manager' not in st.session_state:
         st.session_state.user_manager, st.session_state.github_sync = init_services()
     
-    # Inicializar sync_manager si no existe
-    if 'sync_manager' not in st.session_state and st.session_state.github_sync:
-        from github_sync import init_sync_manager
-        st.session_state.sync_manager = init_sync_manager(st.session_state.github_sync)
-    
-    # Solo sincronizar si hay usuario logueado
-    if st.session_state.get('logged_in', False) and st.session_state.get('sync_manager'):
-        ok, total, msgs = st.session_state.sync_manager.sync_if_changed()
-    
-    # Verificar si hay sesion activa
     if not st.session_state.get('logged_in', False):
         login_screen()
         return
     
-    # Mostrar barra lateral
     sidebar_navigation()
     
-    # Router de páginas
     current_page = st.session_state.get('current_page', "🏠 Inicio")
     
     if current_page == "🏠 Inicio":
@@ -258,8 +216,6 @@ def main():
     elif current_page == "⚡ Gestión de Planes":
         from admin.gestion_planes import gestion_electricidad
         gestion_electricidad()
-    elif current_page == "📊 Monitorización":
-        show_under_construction()
     elif current_page == "👥 Mi Equipo":
         from super.super_panel import show_mi_equipo
         show_mi_equipo()
@@ -286,7 +242,7 @@ def main():
         show_configuracion()
 
 # ===========================================
-# EJECUCIÓN
+# EJECUCION
 # ===========================================
 if __name__ == "__main__":
     main()
