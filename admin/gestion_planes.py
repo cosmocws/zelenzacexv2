@@ -24,12 +24,13 @@ def cargar_config_precios():
         }
 
 def guardar_config_precios(config):
-    """Guarda la configuración de precios en JSON."""
     os.makedirs('data', exist_ok=True)
     with open('data/config_precios.json', 'w', encoding='utf-8') as f:
         json.dump(config, f, indent=4, ensure_ascii=False)
     os.makedirs("data_backup", exist_ok=True)
     shutil.copy("data/config_precios.json", "data_backup/config_precios.json")
+    from core.github_sync import sync_archivo
+    sync_archivo("data/config_precios.json")
 
 def seccion_configuracion_precios():
     """Sección de configuración de precios generales."""
@@ -196,6 +197,8 @@ def gestion_electricidad():
                             df_luz.to_csv("data/precios_luz.csv", index=False, encoding='utf-8')
                             os.makedirs("data_backup", exist_ok=True)
                             shutil.copy("data/precios_luz.csv", "data_backup/precios_luz.csv")
+                            from core.github_sync import sync_archivo
+                            sync_archivo("data/precios_luz.csv")
                             st.success(f"✅ Plan '{row['plan']}' eliminado")
                             st.rerun()
                         else:
@@ -331,6 +334,8 @@ def gestion_electricidad():
                 df_luz.to_csv("data/precios_luz.csv", index=False, encoding='utf-8')
                 os.makedirs("data_backup", exist_ok=True)
                 shutil.copy("data/precios_luz.csv", "data_backup/precios_luz.csv")
+                from core.github_sync import sync_archivo
+                sync_archivo("data/precios_luz.csv")
                                                
                 st.session_state.editing_plan = None
                 st.rerun()

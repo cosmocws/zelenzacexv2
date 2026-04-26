@@ -26,6 +26,11 @@ def guardar_config_super(datos):
         json.dump(datos, f, indent=4, ensure_ascii=False)
     os.makedirs('data_backup', exist_ok=True)
     shutil.copy('data/config_puntos_super.json', 'data_backup/config_puntos_super.json')
+    try:
+        from core.github_sync import sync_archivo
+        sync_archivo("data/config_puntos_super.json")
+    except:
+        pass
 
 def show_configuracion():
     st.title("⚙️ Configuracion")
