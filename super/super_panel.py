@@ -48,12 +48,11 @@ def cargar_registro_diario():
         return {}
 
 def guardar_registro_diario(datos):
-    """Guarda la tabla central."""
     os.makedirs('data', exist_ok=True)
     with open('data/registro_diario.json', 'w', encoding='utf-8') as f:
         json.dump(datos, f, indent=4, ensure_ascii=False)
-    if st.session_state.get('github_sync'):
-        st.session_state.github_sync.sync_file('data/registro_diario.json')
+    from core.github_sync import sync_archivo
+    sync_archivo("data/registro_diario.json")
 
 def cargar_datos_puntos():
     """Carga el archivo de puntos (ventas detalladas, extras, objetivos, pagos)."""
@@ -69,12 +68,11 @@ def cargar_datos_puntos():
         }
 
 def guardar_datos_puntos(datos):
-    """Guarda el archivo de puntos."""
     os.makedirs('data', exist_ok=True)
     with open('data/puntos_agentes.json', 'w', encoding='utf-8') as f:
         json.dump(datos, f, indent=4, ensure_ascii=False)
-    if st.session_state.get('github_sync'):
-        st.session_state.github_sync.sync_file('data/puntos_agentes.json')
+    from core.github_sync import sync_archivo
+    sync_archivo("data/puntos_agentes.json")
 
 def obtener_fecha_hoy():
     return datetime.now().strftime('%Y-%m-%d')
