@@ -212,14 +212,14 @@ def auto_sync_github(github_sync_instance):
 # =============================================
 def sincronizar_si_cambio(github_sync_instance, data_dir: str = "data"):
     """
-    Comprueba si algun archivo JSON en data/ ha cambiado y sincroniza.
-    Los hashes se guardan en data/.hashes_sync para persistir entre recargas.
+    Detecta archivos JSON/CSV que cambiaron y sincroniza SOLO esos.
     """
     if not github_sync_instance:
         return
     
     archivo_hashes = _os.path.join(data_dir, '.hashes_sync')
     
+    # Cargar hashes anteriores
     hashes_anteriores = {}
     try:
         with open(archivo_hashes, 'r') as f:
@@ -227,11 +227,15 @@ def sincronizar_si_cambio(github_sync_instance, data_dir: str = "data"):
     except:
         pass
     
-    archivos_json = [f for f in _os.listdir(data_dir) if f.endswith('.json')]
-    hashes_actuales = {}
-    algo_cambio = False
+    # Buscar archivos JSON y CSV
+    archivos_data = [f for f in _os.listdir(data_dir) if f.endswith('.json') or f.endswith('.csv')]
+    # Excluir archivos ocultos
+    archivos_data = [f for f in archivos_data if not f.startswith('.')]
     
-    for archivo in archivos_json:
+    hashes_actuales = {}
+    archivos_cambiados = []
+    
+    for archivo in archivos_data:
         ruta = _os.path.join(data_dir, archivo)
         try:
             with open(ruta, 'r', encoding='utf-8') as f:
@@ -240,22 +244,23 @@ def sincronizar_si_cambio(github_sync_instance, data_dir: str = "data"):
             hashes_actuales[archivo] = hash_actual
             
             if archivo not in hashes_anteriores:
-                algo_cambio = True
+                archivos_cambiados.append(ruta)
             elif hashes_anteriores[archivo] != hash_actual:
-                algo_cambio = True
+                archivos_cambiados.append(ruta)
         except:
             pass
     
+    # Guardar hashes actuales
     try:
         with open(archivo_hashes, 'w') as f:
             json.dump(hashes_actuales, f)
     except:
         pass
     
-    if algo_cambio:
+    # Sincronizar SOLO los que cambiaron
+    if archivos_cambiados:
         try:
-            github_sync_instance.sync_all_data_files(data_dir)
-        except Exception as e:
-            print(f"Error en auto-sync: {e}")
+            for ruta in archivos_cambiados:
+                github_sync_instance.sync_file(ruta)
         except Exception as e:
             print(f"Error en auto-sync: {e}")
