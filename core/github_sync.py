@@ -3,6 +3,8 @@ import json
 import os
 import requests
 import base64
+import os as _os
+import hashlib as _hashlib
 from datetime import datetime, timedelta
 from typing import Dict, Optional
 
@@ -204,3 +206,42 @@ def auto_sync_github(github_sync_instance):
             return result
         return wrapper
     return decorator
+    
+# =============================================
+# SINCRONIZACION AUTOMATICA
+# =============================================
+def sincronizar_si_cambio(data_dir: str = "data"):
+    """
+    Comprueba si algun archivo JSON en data/ ha cambiado y sincroniza.
+    """
+    import streamlit as st
+    
+    if not st.session_state.get('github_sync'):
+        return
+    
+    if 'hash_archivos' not in st.session_state:
+        st.session_state.hash_archivos = {}
+    
+    archivos_json = [f for f in _os.listdir(data_dir) if f.endswith('.json')]
+    algo_cambio = False
+    
+    for archivo in archivos_json:
+        ruta = _os.path.join(data_dir, archivo)
+        try:
+            with open(ruta, 'r', encoding='utf-8') as f:
+                contenido = f.read()
+            hash_actual = _hashlib.md5(contenido.encode()).hexdigest()
+            
+            if archivo not in st.session_state.hash_archivos:
+                st.session_state.hash_archivos[archivo] = hash_actual
+            elif st.session_state.hash_archivos[archivo] != hash_actual:
+                algo_cambio = True
+                st.session_state.hash_archivos[archivo] = hash_actual
+        except:
+            pass
+    
+    if algo_cambio:
+        try:
+            st.session_state.github_sync.sync_all_data_files(data_dir)
+        except Exception as e:
+            print(f"Error en auto-sync: {e}")
