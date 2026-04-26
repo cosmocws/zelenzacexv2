@@ -1,4 +1,4 @@
-# core/github_sync.py
+# github_sync.py
 import os
 import json
 import time
