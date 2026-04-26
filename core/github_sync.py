@@ -210,17 +210,16 @@ def auto_sync_github(github_sync_instance):
 # =============================================
 # SINCRONIZACION AUTOMATICA
 # =============================================
-def sincronizar_si_cambio(data_dir: str = "data"):
+def sincronizar_si_cambio(github_sync_instance, data_dir: str = "data"):
     """
     Comprueba si algun archivo JSON en data/ ha cambiado y sincroniza.
     Los hashes se guardan en data/.hashes_sync para persistir entre recargas.
     """
-    if not st.session_state.get('github_sync'):
+    if not github_sync_instance:
         return
     
     archivo_hashes = _os.path.join(data_dir, '.hashes_sync')
     
-    # Cargar hashes anteriores
     hashes_anteriores = {}
     try:
         with open(archivo_hashes, 'r') as f:
@@ -247,7 +246,6 @@ def sincronizar_si_cambio(data_dir: str = "data"):
         except:
             pass
     
-    # Guardar hashes actuales
     try:
         with open(archivo_hashes, 'w') as f:
             json.dump(hashes_actuales, f)
@@ -256,6 +254,8 @@ def sincronizar_si_cambio(data_dir: str = "data"):
     
     if algo_cambio:
         try:
-            st.session_state.github_sync.sync_all_data_files(data_dir)
+            github_sync_instance.sync_all_data_files(data_dir)
+        except Exception as e:
+            print(f"Error en auto-sync: {e}")
         except Exception as e:
             print(f"Error en auto-sync: {e}")
