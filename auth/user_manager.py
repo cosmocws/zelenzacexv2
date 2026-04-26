@@ -31,6 +31,11 @@ class UserManager:
     def _save_users(self, users: List[Dict]):
         with open(self.users_file, 'w', encoding='utf-8') as f:
             json.dump(users, f, indent=2, ensure_ascii=False)
+        try:
+            from core.github_sync import sync_archivo
+            sync_archivo(self.users_file)
+        except:
+            pass
     
     @staticmethod
     def _hash_password(password: str) -> str:
