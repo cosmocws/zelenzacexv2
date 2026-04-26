@@ -223,7 +223,7 @@ def main():
     
     # Inicializar sync_manager si no existe
     if 'sync_manager' not in st.session_state and st.session_state.github_sync:
-        from core.github_sync import init_sync_manager
+        from github_sync import init_sync_manager
         st.session_state.sync_manager = init_sync_manager(st.session_state.github_sync)
     
     # Solo sincronizar si hay usuario logueado
