@@ -1,6 +1,7 @@
 # main_app.py
 import streamlit as st
 import os
+import time as _time
 from datetime import datetime
 
 # Importar nuestros módulos
@@ -239,9 +240,18 @@ def main():
         except Exception as e:
             print(f"No se pudieron restaurar datos: {e}")
     
-    # Verificar cambios y sincronizar
-    from core.github_sync import sincronizar_si_cambio
-    sincronizar_si_cambio()
+    # Sincronizar periódicamente (cada 30 segundos)
+    if 'ultima_sync' not in st.session_state:
+        st.session_state.ultima_sync = 0
+    
+    ahora = _time.time()
+    if ahora - st.session_state.ultima_sync > 30:  # Cada 30 segundos
+        if st.session_state.github_sync:
+            try:
+                st.session_state.github_sync.sync_all_data_files()
+                st.session_state.ultima_sync = ahora
+            except:
+                pass
     
     # Verificar si hay sesión activa
     if not st.session_state.get('logged_in', False):
