@@ -6,8 +6,8 @@ from datetime import datetime
 
 # Importar nuestros módulos
 from auth.user_manager import UserManager
-from core.config import STREAMLIT_CONFIG, USER_ROLES, DEFAULT_CAMPAIGN
-from core.github_sync import GitHubSync
+from config import STREAMLIT_CONFIG, USER_ROLES, DEFAULT_CAMPAIGN
+from github_sync import GitHubSync
 
 # ===========================================
 # CONFIGURACIÓN INICIAL DE STREAMLIT
