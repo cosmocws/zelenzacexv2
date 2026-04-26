@@ -227,19 +227,6 @@ def main():
     if 'user_manager' not in st.session_state:
         st.session_state.user_manager, st.session_state.github_sync = init_services()
     
-    # =============================================
-    # SINCRONIZACION AUTOMATICA AL INICIAR
-    # =============================================
-    if 'first_run' not in st.session_state:
-        st.session_state.first_run = True
-    
-    if st.session_state.first_run and st.session_state.github_sync:
-        try:
-            st.session_state.github_sync.restore_all_data_files()
-            st.session_state.first_run = False
-        except Exception as e:
-            print(f"No se pudieron restaurar datos: {e}")
-    
     # Verificar cambios y sincronizar
     from core.github_sync import sincronizar_si_cambio
     sincronizar_si_cambio(st.session_state.github_sync)
