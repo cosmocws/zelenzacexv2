@@ -1,18 +1,15 @@
 # core/github_sync.py
-import json
 import os
+import json
+import time
 import requests
 import base64
-import os as _os
-import hashlib as _hashlib
-from datetime import datetime, timedelta
+import hashlib
+from datetime import datetime
 from typing import Dict, Optional
 
 class GitHubSync:
-    """
-    Sincroniza automáticamente los archivos JSON modificados con GitHub.
-    Garantiza que los datos de Streamlit Cloud persistan entre reinicios.
-    """
+    """Sincroniza archivos individuales con GitHub."""
     
     def __init__(self, token: str, repo_owner: str, repo_name: str, branch: str = "main"):
         self.token = token
@@ -26,162 +23,64 @@ class GitHubSync:
         }
         self.sync_log = []
     
-    def sync_file(self, local_path: str, commit_message: Optional[str] = None) -> bool:
-        """
-        Sincroniza un archivo local con GitHub.
-        
-        Args:
-            local_path: Ruta del archivo local a sincronizar
-            commit_message: Mensaje del commit (opcional)
-        
-        Returns:
-            True si la sincronización fue exitosa
-        """
+    def _get_file_sha(self, file_path: str) -> Optional[str]:
+        try:
+            url = f"{self.base_url}/contents/{file_path}"
+            response = requests.get(url, headers=self.headers)
+            if response.status_code == 200:
+                return response.json().get('sha')
+        except:
+            pass
+        return None
+    
+    def upload_file(self, local_path: str, commit_message: str = None) -> tuple:
+        """Sube UN archivo a GitHub. Retorna (exito, mensaje)."""
         try:
             if not os.path.exists(local_path):
-                print(f"Archivo no encontrado: {local_path}")
-                return False
+                return False, f"No existe: {local_path}"
             
             with open(local_path, 'r', encoding='utf-8') as f:
                 content = f.read()
             
-            # Normalizar la ruta para GitHub
             file_path = local_path.replace('\\', '/')
-            
-            # Intentar obtener el archivo actual de GitHub
             existing_sha = self._get_file_sha(file_path)
             
-            # Preparar el contenido para GitHub
-            content_bytes = content.encode('utf-8')
-            content_base64 = base64.b64encode(content_bytes).decode('utf-8')
+            content_base64 = base64.b64encode(content.encode('utf-8')).decode('utf-8')
             
-            # Preparar el payload
             payload = {
-                "message": commit_message or f"Auto-sync: {datetime.now().isoformat()}",
+                "message": commit_message or f"Sync: {datetime.now().isoformat()}",
                 "content": content_base64,
                 "branch": self.branch
             }
-            
             if existing_sha:
                 payload["sha"] = existing_sha
             
-            # Hacer la petición a GitHub
             url = f"{self.base_url}/contents/{file_path}"
-            
-            if existing_sha:
-                response = requests.put(url, headers=self.headers, json=payload)
-            else:
-                response = requests.put(url, headers=self.headers, json=payload)
+            response = requests.put(url, headers=self.headers, json=payload)
             
             if response.status_code in [200, 201]:
                 self.sync_log.append({
                     "file": file_path,
                     "status": "success",
-                    "timestamp": datetime.now().isoformat(),
-                    "commit": response.json().get('commit', {}).get('sha', 'unknown')
+                    "timestamp": datetime.now().isoformat()
                 })
-                print(f"✅ Sincronizado: {file_path}")
-                return True
+                return True, f"{os.path.basename(local_path)}"
             else:
-                print(f"❌ Error sincronizando {file_path}: {response.status_code}")
-                print(f"Respuesta: {response.json()}")
-                return False
+                return False, f"Error {response.status_code}"
         
         except Exception as e:
-            print(f"❌ Excepción sincronizando {file_path}: {e}")
-            return False
+            return False, str(e)[:100]
     
-    def sync_multiple_files(self, file_paths: list, commit_message: Optional[str] = None) -> Dict:
-        """
-        Sincroniza múltiples archivos de una vez.
-        
-        Returns:
-            Diccionario con el resumen de la operación
-        """
-        results = {"success": [], "failed": []}
-        
-        for path in file_paths:
-            if self.sync_file(path, commit_message):
-                results["success"].append(path)
-            else:
-                results["failed"].append(path)
-        
-        return results
-    
-    def sync_all_data_files(self, data_dir: str = "data") -> Dict:
-        """
-        Sincroniza todos los archivos JSON del directorio de datos.
-        Este es el método que más usarás.
-        """
-        if not os.path.exists(data_dir):
-            return {"success": [], "failed": []}
-        
-        json_files = [os.path.join(data_dir, f) for f in os.listdir(data_dir) if f.endswith('.json')]
-        return self.sync_multiple_files(json_files, f"Auto-sync all data: {datetime.now().isoformat()}")
-    
-    def restore_file(self, file_path: str) -> bool:
-        """
-        Restaura un archivo desde GitHub al sistema local.
-        Útil cuando Streamlit Cloud se reinicia y se pierden los datos.
-        """
+    def test_connection(self) -> tuple:
+        """Prueba la conexion con GitHub."""
         try:
-            sha = self._get_file_sha(file_path)
-            if not sha:
-                print(f"Archivo no encontrado en GitHub: {file_path}")
-                return False
-            
-            url = f"{self.base_url}/contents/{file_path}"
+            url = f"{self.base_url}/contents/data"
             response = requests.get(url, headers=self.headers)
-            
-            if response.status_code == 200:
-                content_base64 = response.json()['content']
-                content_bytes = base64.b64decode(content_base64)
-                
-                # Asegurar que el directorio existe
-                os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                
-                with open(file_path, 'wb') as f:
-                    f.write(content_bytes)
-                
-                print(f"✅ Restaurado desde GitHub: {file_path}")
-                return True
-            else:
-                print(f"❌ Error restaurando {file_path}")
-                return False
+            return response.status_code == 200, "OK" if response.status_code == 200 else f"Error {response.status_code}"
         except Exception as e:
-            print(f"❌ Excepción restaurando {file_path}: {e}")
-            return False
-    
-    def restore_all_data_files(self, data_dir: str = "data") -> Dict:
-        """Restaura todos los archivos de datos desde GitHub."""
-        # Listar archivos en el repositorio
-        url = f"{self.base_url}/contents/{data_dir}"
-        response = requests.get(url, headers=self.headers)
-        
-        results = {"success": [], "failed": []}
-        
-        if response.status_code == 200:
-            for item in response.json():
-                if item['type'] == 'file' and item['name'].endswith('.json'):
-                    file_path = f"{data_dir}/{item['name']}"
-                    if self.restore_file(file_path):
-                        results["success"].append(file_path)
-                    else:
-                        results["failed"].append(file_path)
-        
-        return results
-    
-    def _get_file_sha(self, file_path: str) -> Optional[str]:
-        """Obtiene el SHA de un archivo en GitHub."""
-        url = f"{self.base_url}/contents/{file_path}"
-        response = requests.get(url, headers=self.headers)
-        
-        if response.status_code == 200:
-            return response.json().get('sha')
-        return None
+            return False, str(e)[:100]
     
     def get_sync_status(self) -> Dict:
-        """Devuelve el estado actual de las sincronizaciones."""
         return {
             "last_sync": self.sync_log[-1] if self.sync_log else None,
             "total_syncs": len(self.sync_log),
@@ -189,78 +88,81 @@ class GitHubSync:
         }
 
 
-# Decorador para sincronización automática después de operaciones
-def auto_sync_github(github_sync_instance):
-    """
-    Decorador para sincronizar automáticamente después de modificar datos.
+class DataSyncManager:
+    """Detecta cambios y sincroniza SOLO archivos modificados."""
     
-    Uso:
-        @auto_sync_github(github_sync)
-        def crear_usuario():
-            ...
-    """
-    def decorator(func):
-        def wrapper(*args, **kwargs):
-            result = func(*args, **kwargs)
-            github_sync_instance.sync_all_data_files()
-            return result
-        return wrapper
-    return decorator
+    def __init__(self, github_sync: GitHubSync, data_dir: str = "data"):
+        self.github_sync = github_sync
+        self.data_dir = data_dir
+        self.last_modified_times = {}
+        self.last_sync_time = None
+        self.sync_interval = 300  # 5 minutos entre syncs
     
-# =============================================
-# SINCRONIZACION AUTOMATICA
-# =============================================
-def sincronizar_si_cambio(github_sync_instance, data_dir: str = "data"):
-    """
-    Detecta archivos JSON/CSV que cambiaron y sincroniza SOLO esos.
-    """
-    if not github_sync_instance:
-        return
+    def _get_all_files(self) -> list:
+        """Obtiene todos los archivos JSON y CSV en data/"""
+        files = []
+        if os.path.exists(self.data_dir):
+            for f in os.listdir(self.data_dir):
+                if (f.endswith('.json') or f.endswith('.csv')) and not f.startswith('.'):
+                    files.append(os.path.join(self.data_dir, f))
+        return files
     
-    archivo_hashes = _os.path.join(data_dir, '.hashes_sync')
+    def check_for_changes(self) -> list:
+        """Devuelve lista de archivos que cambiaron desde la ultima sincronizacion."""
+        changed = []
+        for file_path in self._get_all_files():
+            if os.path.exists(file_path):
+                current_mtime = os.path.getmtime(file_path)
+                last_mtime = self.last_modified_times.get(file_path, 0)
+                
+                if current_mtime > last_mtime:
+                    changed.append(file_path)
+                    self.last_modified_times[file_path] = current_mtime
+        
+        return changed
     
-    # Cargar hashes anteriores
-    hashes_anteriores = {}
-    try:
-        with open(archivo_hashes, 'r') as f:
-            hashes_anteriores = json.load(f)
-    except:
-        pass
+    def sync_if_changed(self) -> tuple:
+        """Sincroniza si hay cambios y ha pasado el intervalo. Retorna (exitos, total, mensajes)."""
+        if self.github_sync is None:
+            return 0, 0, ["GitHub no configurado"]
+        
+        # Respetar intervalo
+        ahora = time.time()
+        if self.last_sync_time and (ahora - self.last_sync_time) < self.sync_interval:
+            return 0, 0, []
+        
+        changed_files = self.check_for_changes()
+        if not changed_files:
+            return 0, 0, []
+        
+        # Probar conexion primero
+        test_ok, _ = self.github_sync.test_connection()
+        if not test_ok:
+            return 0, len(changed_files), ["Sin conexion a GitHub"]
+        
+        results = []
+        success_count = 0
+        
+        for file_path in changed_files:
+            ok, msg = self.github_sync.upload_file(file_path)
+            results.append(msg)
+            if ok:
+                success_count += 1
+        
+        self.last_sync_time = ahora
+        return success_count, len(changed_files), results
     
-    # Buscar archivos JSON y CSV
-    archivos_data = [f for f in _os.listdir(data_dir) if f.endswith('.json') or f.endswith('.csv')]
-    # Excluir archivos ocultos
-    archivos_data = [f for f in archivos_data if not f.startswith('.')]
-    
-    hashes_actuales = {}
-    archivos_cambiados = []
-    
-    for archivo in archivos_data:
-        ruta = _os.path.join(data_dir, archivo)
-        try:
-            with open(ruta, 'r', encoding='utf-8') as f:
-                contenido = f.read()
-            hash_actual = _hashlib.md5(contenido.encode()).hexdigest()
-            hashes_actuales[archivo] = hash_actual
-            
-            if archivo not in hashes_anteriores:
-                archivos_cambiados.append(ruta)
-            elif hashes_anteriores[archivo] != hash_actual:
-                archivos_cambiados.append(ruta)
-        except:
-            pass
-    
-    # Guardar hashes actuales
-    try:
-        with open(archivo_hashes, 'w') as f:
-            json.dump(hashes_actuales, f)
-    except:
-        pass
-    
-    # Sincronizar SOLO los que cambiaron
-    if archivos_cambiados:
-        try:
-            for ruta in archivos_cambiados:
-                github_sync_instance.sync_file(ruta)
-        except Exception as e:
-            print(f"Error en auto-sync: {e}")
+    def get_status(self) -> Dict:
+        """Estado actual de la sincronizacion."""
+        changed = self.check_for_changes()
+        return {
+            "last_sync": self.last_sync_time,
+            "changed_files": [os.path.basename(f) for f in changed],
+            "total_synced": len(self.github_sync.sync_log) if self.github_sync else 0,
+            "github_available": self.github_sync is not None
+        }
+
+
+def init_sync_manager(github_sync: GitHubSync) -> DataSyncManager:
+    """Inicializa el gestor de sincronizacion."""
+    return DataSyncManager(github_sync)
