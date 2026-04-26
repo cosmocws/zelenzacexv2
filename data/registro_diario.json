@@ -84,5 +84,85 @@
             "llamadas_15m": 0,
             "ausente": false
         }
+    },
+    "2026-04-24": {
+        "0381": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true
+        },
+        "0492": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false
+        },
+        "0613": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false
+        },
+        "0657": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false
+        },
+        "0733": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false
+        },
+        "0775": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false
+        },
+        "0782": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false
+        },
+        "0821": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false
+        },
+        "0828": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true
+        },
+        "0883": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false
+        },
+        "0916": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true
+        },
+        "1011": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false
+        },
+        "1012": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true
+        }
     }
 }
