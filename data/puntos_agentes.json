@@ -21,6 +21,19 @@
                     "puntos": 91
                 }
             ]
+        },
+        "0733": {
+            "2026-04-24": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151
+                }
+            ]
         }
     },
     "objetivos_cumplidos": {},
