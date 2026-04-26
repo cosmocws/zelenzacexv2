@@ -76,7 +76,7 @@
     "active_absence": null,
     "incorporation_date": "2026-04-25",
     "created_at": "2026-04-25T22:40:41.040373",
-    "last_login": "2026-04-26T02:46:29.376207"
+    "last_login": "2026-04-26T11:06:48.265283"
   },
   {
     "username": "0202",
@@ -774,7 +774,9 @@
       "weekly_hours": 30.0,
       "type": "full_time"
     },
-    "managed_agents": [],
+    "managed_agents": [
+      "0235"
+    ],
     "sph_config": null,
     "campaign_history": null,
     "active_absence": null,
@@ -812,6 +814,54 @@
     "active_absence": null,
     "incorporation_date": "2026-04-26",
     "created_at": "2026-04-26T09:13:54.980660",
+    "last_login": null
+  },
+  {
+    "username": "0235",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Fernando Sarmiento",
+    "id_empleado": "363",
+    "email": "",
+    "campaign": "CAPTA",
+    "team": "Sin equipo",
+    "manager": "0012",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-26",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-26T11:06:00.494345"
+        }
+      ]
+    },
+    "campaign_history": [
+      {
+        "from": null,
+        "to": "CAPTA",
+        "changed_at": "2026-04-26T11:06:00.494356"
+      }
+    ],
+    "active_absence": null,
+    "incorporation_date": "2026-04-26",
+    "created_at": "2026-04-26T11:06:00.494368",
     "last_login": null
   }
 ]
