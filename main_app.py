@@ -221,17 +221,22 @@ def show_under_construction():
 # APLICACIÓN PRINCIPAL
 # ===========================================
 def main():
-    """Punto de entrada principal de la aplicación."""
+    """Punto de entrada principal de la aplicacion."""
     
     # Inicializar servicios si no existen
     if 'user_manager' not in st.session_state:
         st.session_state.user_manager, st.session_state.github_sync = init_services()
     
-    # Verificar cambios y sincronizar
-    from core.github_sync import sincronizar_si_cambio
-    sincronizar_si_cambio(st.session_state.github_sync)
+    # Inicializar sync_manager si no existe
+    if 'sync_manager' not in st.session_state and st.session_state.github_sync:
+        from core.github_sync import init_sync_manager
+        st.session_state.sync_manager = init_sync_manager(st.session_state.github_sync)
     
-    # Verificar si hay sesión activa
+    # Solo sincronizar si hay usuario logueado
+    if st.session_state.get('logged_in', False) and st.session_state.get('sync_manager'):
+        ok, total, msgs = st.session_state.sync_manager.sync_if_changed()
+    
+    # Verificar si hay sesion activa
     if not st.session_state.get('logged_in', False):
         login_screen()
         return
