@@ -123,8 +123,6 @@ def show_gestion_usuarios():
                                 sph_target=sph_target
                             )
                             st.success(f"✅ Usuario '{username}' creado con exito!")
-                            if st.session_state.github_sync:
-                                st.session_state.github_sync.sync_all_data_files()
                         except ValueError as e:
                             st.error(str(e))
         
@@ -196,8 +194,6 @@ def show_gestion_usuarios():
                             st.warning("Errores:")
                             for err in result['errors']:
                                 st.write(f" - {err}")
-                        if st.session_state.github_sync:
-                            st.session_state.github_sync.sync_all_data_files()
     
     # =============================================
     # PESTAÑA 2: MODIFICAR USUARIO
@@ -305,8 +301,6 @@ def show_gestion_usuarios():
                         if updates:
                             um.update_user(selected_user, updates)
                             st.success(f"✅ Usuario '{selected_user}' actualizado!")
-                            if st.session_state.github_sync:
-                                st.session_state.github_sync.sync_all_data_files()
                         else:
                             st.info("No se detectaron cambios")
     
@@ -344,8 +338,6 @@ def show_gestion_usuarios():
                 if user_to_delete:
                     um.delete_user(user_to_delete)
                     st.success(f"✅ Usuario '{user_to_delete}' eliminado!")
-                    if st.session_state.github_sync:
-                        st.session_state.github_sync.sync_all_data_files()
                     st.rerun()
         else:
             users_to_delete = st.multiselect(
@@ -360,8 +352,6 @@ def show_gestion_usuarios():
                     st.warning("Errores:")
                     for err in result['errors']:
                         st.write(f" - {err}")
-                if st.session_state.github_sync:
-                    st.session_state.github_sync.sync_all_data_files()
                 st.rerun()
     
     # =============================================
