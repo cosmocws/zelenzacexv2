@@ -242,7 +242,7 @@ def main():
     
     # Verificar cambios y sincronizar
     from core.github_sync import sincronizar_si_cambio
-    sincronizar_si_cambio()
+    sincronizar_si_cambio(st.session_state.github_sync)
     
     # Verificar si hay sesión activa
     if not st.session_state.get('logged_in', False):
