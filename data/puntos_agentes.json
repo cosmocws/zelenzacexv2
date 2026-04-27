@@ -126,6 +126,16 @@
                     "supervisor": "0731"
                 }
             ]
+        },
+        "0928": {
+            "2026-04-27": [
+                {
+                    "puntos": 200,
+                    "motivo": "<= 5 VENTAS SEMANA ANTERIOR",
+                    "campaña": "CAPTA",
+                    "supervisor": "0012"
+                }
+            ]
         }
     },
     "pagos_realizados": {}
