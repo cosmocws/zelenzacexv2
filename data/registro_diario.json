@@ -11,6 +11,102 @@
         "0492": {
             "ventas": 1,
             "llamadas_5m": 0,
+            "llamadas_15m": 1,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0202": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0381": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0613": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0657": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0733": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0775": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0782": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0821": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0883": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0916": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "1011": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "1012": {
+            "ventas": 0,
+            "llamadas_5m": 0,
             "llamadas_15m": 0,
             "ausente": false,
             "campaña": "CAPTA",
