@@ -89,7 +89,8 @@
       "type": "full_time"
     },
     "managed_agents": [
-      "0330"
+      "0330",
+      "W0330"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -249,7 +250,48 @@
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T12:07:48.377189",
     "last_login": null,
-    "standby": false,
+    "standby": true,
     "usuario_padre": null
+  },
+  {
+    "username": "W0330",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Marina García",
+    "id_empleado": "707",
+    "campaign": "WINBACK",
+    "team": "Equipo Pablo",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "14:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 7.0,
+      "weekly_hours": 35.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T12:08:04.561246"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T12:08:04.561251",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0330"
   }
 ]
