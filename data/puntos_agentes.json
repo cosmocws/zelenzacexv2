@@ -12,6 +12,16 @@
                     "puntos": 151,
                     "campaña": "CAPTA",
                     "supervisor": "0731"
+                },
+                {
+                    "producto": "Gas",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "FE"
+                    ],
+                    "puntos": 41,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
                 }
             ]
         }
