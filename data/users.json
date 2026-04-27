@@ -30,5 +30,36 @@
     "incorporation_date": "2026-04-25",
     "created_at": "2026-04-25T22:38:36.615859",
     "last_login": "2026-04-27T11:49:12.305495"
+  },
+  {
+    "username": "0731",
+    "password_hash": "f37f559d25de4aa17b6dedd021baa32094685e69664871b1e6f029dc058907dc",
+    "role": "super",
+    "nombre": "Luis Ortega",
+    "id_empleado": "",
+    "campaign": null,
+    "team": "Sin equipo",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": null,
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T11:50:34.217426",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
   }
 ]
