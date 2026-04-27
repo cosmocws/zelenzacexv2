@@ -1539,7 +1539,8 @@
     "managed_agents": [
       "1013",
       "1016",
-      "1017"
+      "1017",
+      "1018"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -1667,6 +1668,47 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T18:49:58.823666",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1018",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Francisco Sola",
+    "id_empleado": "1733",
+    "campaign": "CAPTA",
+    "team": "Equipo NÓVEL",
+    "manager": "0694",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T18:51:14.753832"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T18:51:14.753838",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
