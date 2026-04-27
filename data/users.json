@@ -144,7 +144,8 @@
       "0811",
       "0928",
       "0929",
-      "0934"
+      "0934",
+      "0955"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -1215,6 +1216,47 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T16:51:39.399364",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0955",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Bartlomiej Krzystof",
+    "id_empleado": "1636",
+    "campaign": "CAPTA",
+    "team": "Equipo Diego",
+    "manager": "0012",
+    "schedule": {
+      "start_time": "16:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 5.0,
+      "weekly_hours": 25.0,
+      "type": "reduced"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:53:11.753345"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:53:11.753354",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
