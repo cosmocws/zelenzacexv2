@@ -39,6 +39,20 @@
                     "supervisor": "0731"
                 }
             ]
+        },
+        "0733": {
+            "2026-04-27": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "FE"
+                    ],
+                    "puntos": 101,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
         }
     },
     "objetivos_cumplidos": {},
