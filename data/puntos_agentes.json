@@ -51,6 +51,17 @@
                     "puntos": 101,
                     "campaña": "CAPTA",
                     "supervisor": "0731"
+                },
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
                 }
             ]
         },
