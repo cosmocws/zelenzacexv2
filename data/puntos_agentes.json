@@ -24,6 +24,21 @@
                     "supervisor": "0731"
                 }
             ]
+        },
+        "0492": {
+            "2026-04-27": [
+                {
+                    "producto": "Gas",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PMG",
+                        "FE"
+                    ],
+                    "puntos": 61,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
         }
     },
     "objetivos_cumplidos": {},
