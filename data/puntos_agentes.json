@@ -83,6 +83,21 @@
                     "supervisor": "0012"
                 }
             ]
+        },
+        "0928": {
+            "2026-04-27": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0012"
+                }
+            ]
         }
     },
     "objetivos_cumplidos": {},
