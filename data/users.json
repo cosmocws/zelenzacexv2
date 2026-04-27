@@ -147,7 +147,8 @@
       "0934",
       "0955",
       "0966",
-      "0998"
+      "0998",
+      "1002"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -1341,6 +1342,47 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T16:54:48.903114",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1002",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Sheila Larrisa Maidana",
+    "id_empleado": "1721",
+    "campaign": "CAPTA",
+    "team": "Equipo Diego",
+    "manager": "0012",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T16:59:27.399105"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:59:27.399113",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
