@@ -58,7 +58,8 @@
       "0202",
       "0381",
       "0828",
-      "0492"
+      "0492",
+      "0613"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -374,6 +375,47 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T13:49:37.314349",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0613",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Nuria Roldán",
+    "id_empleado": "1206",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-27T13:51:11.428752"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:51:11.428765",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
