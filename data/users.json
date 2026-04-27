@@ -134,7 +134,9 @@
       "weekly_hours": 30.0,
       "type": "full_time"
     },
-    "managed_agents": [],
+    "managed_agents": [
+      "0235"
+    ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T12:02:26.651175",
@@ -794,6 +796,47 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T13:58:25.585955",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0235",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Fernando Sarmiento",
+    "id_empleado": "363",
+    "campaign": "CAPTA",
+    "team": "Equipo Diego",
+    "manager": "0012",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.1,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.1,
+          "set_at": "2026-04-27T16:39:03.474993"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:39:03.474999",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
