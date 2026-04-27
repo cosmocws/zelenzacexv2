@@ -62,7 +62,8 @@
       "0613",
       "0657",
       "0733",
-      "0775"
+      "0775",
+      "0782"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -542,6 +543,47 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T13:54:27.012584",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0782",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Rocío Miranda",
+    "id_empleado": "1410",
+    "campaign": "CAPTA",
+    "team": "Equipo Luis",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T13:55:34.079724"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:55:34.079733",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
