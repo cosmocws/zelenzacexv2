@@ -95,7 +95,7 @@ def calcular_coste_plan(
     total_neto = total_bruto - cfg['DESCUENTO_PRIMERA_FACTURA']
     
     # 10. Mensualizar (aproximado)
-    coste_mensual = (total_neto / dias) * 30 if dias > 0 else total_neto
+    coste_mensual = total_neto
     
     return {
         'coste_total': round(total_neto, 2),
