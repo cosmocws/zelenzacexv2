@@ -27,6 +27,17 @@
         }
     },
     "objetivos_cumplidos": {},
-    "puntos_extra": {},
+    "puntos_extra": {
+        "0828": {
+            "2026-04-27": [
+                {
+                    "puntos": 400,
+                    "motivo": "Semana anterior <=5 VENTAS",
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        }
+    },
     "pagos_realizados": {}
 }
