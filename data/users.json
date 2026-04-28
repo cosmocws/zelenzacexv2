@@ -106,7 +106,8 @@
       "0640",
       "0650",
       "0675",
-      "0808"
+      "0808",
+      "0823"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -2045,6 +2046,47 @@
     },
     "incorporation_date": "2026-04-28",
     "created_at": "2026-04-28T12:40:39.399819",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0823",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Jose Antonio Nuñez",
+    "id_empleado": "1512",
+    "campaign": "CAPTA",
+    "team": "Equipo Pablo",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "10:00",
+      "end_time": "17:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 7.0,
+      "weekly_hours": 35.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:42:02.913360"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:42:02.913370",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
