@@ -123,22 +123,26 @@ def show_inicio_super():
         username = agente['username']
         horas_diarias = agente.get('schedule', {}).get('daily_hours', 6.0)
         
+        # Ventas desde REGISTRO DIARIO
         ventas_mes = 0
-        ventas_agente = datos_puntos['ventas'].get(username, {})
-        for fecha, ventas_dia in ventas_agente.items():
-            if fecha.startswith(mes_actual):
-                ventas_mes += len(ventas_dia)
+        horas_totales = 0
+        for fecha, agentes in registro.items():
+            if fecha.startswith(mes_actual) and username in agentes:
+                datos = agentes[username]
+                if datos.get('supervisor', '') == supervisor and not datos.get('ausente', False):
+                    ventas_mes += datos.get('ventas', 0)
+                    hora_salida = datos.get('hora_salida', '')
+                    if hora_salida:
+                        try:
+                            h_ini = datetime.strptime(agente.get('schedule', {}).get('start_time', '15:00'), '%H:%M')
+                            h_fin = datetime.strptime(hora_salida, '%H:%M')
+                            horas_totales += round((h_fin - h_ini).seconds / 3600, 2)
+                        except:
+                            horas_totales += horas_diarias
+                    else:
+                        horas_totales += horas_diarias
         
-        dias_lab = sum(1 for d in range(1, hoy.day + 1) if datetime(hoy.year, hoy.month, d).weekday() < 5)
-        dias_aus = 0
-        for fecha_str, datos_dia in registro.items():
-            if fecha_str.startswith(mes_actual) and username in datos_dia:
-                if datos_dia[username].get('ausente', False):
-                    dias_aus += 1
-        
-        dias_efec = max(0, dias_lab - dias_aus)
-        horas_tot = horas_diarias * dias_efec
-        sph = round(ventas_mes / (horas_tot * 0.83), 2) if ventas_mes > 0 and horas_tot > 0 else 0.0
+        sph = round(ventas_mes / (horas_totales * 0.83), 2) if ventas_mes > 0 and horas_totales > 0 else 0.0
         
         ranking.append({
             'Agente': username,

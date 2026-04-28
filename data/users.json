@@ -29,7 +29,7 @@
     "active_absence": null,
     "incorporation_date": "2026-04-25",
     "created_at": "2026-04-25T22:38:36.615859",
-    "last_login": "2026-04-27T18:35:17.937803"
+    "last_login": "2026-04-28T09:26:42.958786"
   },
   {
     "username": "0731",
@@ -73,7 +73,7 @@
     "sph_config": null,
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T11:50:34.217426",
-    "last_login": "2026-04-28T08:30:23.835074",
+    "last_login": "2026-04-28T09:27:28.322084",
     "standby": false,
     "usuario_padre": null
   },
@@ -361,7 +361,7 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T12:11:56.855399",
-    "last_login": "2026-04-27T12:20:49.161074",
+    "last_login": "2026-04-28T08:58:11.965798",
     "standby": false,
     "usuario_padre": null
   },
@@ -402,7 +402,7 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T13:49:37.314349",
-    "last_login": "2026-04-27T18:36:13.807158",
+    "last_login": "2026-04-28T09:37:05.644981",
     "standby": false,
     "usuario_padre": null
   },
@@ -484,7 +484,7 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T13:52:06.330331",
-    "last_login": null,
+    "last_login": "2026-04-28T09:00:33.104573",
     "standby": false,
     "usuario_padre": null
   },
@@ -525,7 +525,7 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T13:53:16.268892",
-    "last_login": "2026-04-28T08:33:52.544573",
+    "last_login": "2026-04-28T09:26:59.138447",
     "standby": false,
     "usuario_padre": null
   },
@@ -689,7 +689,7 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T13:56:50.963047",
-    "last_login": null,
+    "last_login": "2026-04-28T08:57:49.394312",
     "standby": false,
     "usuario_padre": null
   },

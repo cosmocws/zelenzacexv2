@@ -14,7 +14,9 @@
             "llamadas_15m": 1,
             "ausente": false,
             "campaña": "CAPTA",
-            "supervisor": "0731"
+            "supervisor": "0731",
+            "hora_salida": "15:45",
+            "motivo_parcial": "Motivos personales"
         },
         "0202": {
             "ventas": 0,

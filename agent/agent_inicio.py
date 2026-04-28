@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 from core.monitorizaciones import obtener_ultima_monitorizacion
+from super.super_panel import PUNTOS_PRODUCTO
 
 def show_inicio():
     """Pantalla de inicio del agente."""
@@ -86,7 +87,7 @@ def show_inicio():
         sph_config = agente.get('sph_config', {})
         sph_target = sph_config.get('target', 0.06)
         
-        # Ventas del mes (solo de este usuario)
+        # Ventas del mes
         ventas_mes = 0
         ventas_agente = datos_puntos['ventas'].get(username, {})
         for fecha, ventas_dia in ventas_agente.items():
@@ -106,8 +107,25 @@ def show_inicio():
                 if reg_dia.get('ausente', False):
                     dias_ausente += 1
         
-        dias_efectivos = max(0, dias_laborables - dias_ausente)
-        horas_totales = horas_diarias * dias_efectivos
+        # Calcular horas reales (con ausencias parciales)
+        horas_totales = 0
+        for d in range(dia_inicio, hoy_dt.day + 1):
+            fecha_check = datetime(hoy_dt.year, hoy_dt.month, d)
+            if fecha_check.weekday() < 5:
+                fecha_str = fecha_check.strftime('%Y-%m-%d')
+                reg_dia = registro.get(fecha_str, {}).get(username, {})
+                if not reg_dia.get('ausente', False):
+                    hora_salida = reg_dia.get('hora_salida', '')
+                    if hora_salida:
+                        try:
+                            h_ini = datetime.strptime(agente.get('schedule', {}).get('start_time', '15:00'), '%H:%M')
+                            h_fin = datetime.strptime(hora_salida, '%H:%M')
+                            horas_totales += round((h_fin - h_ini).seconds / 3600, 2)
+                        except:
+                            horas_totales += horas_diarias
+                    else:
+                        horas_totales += horas_diarias
+        
         sph_real = round(ventas_mes / (horas_totales * 0.83), 2) if ventas_mes > 0 and horas_totales > 0 else 0.0
         
         col_s1, col_s2, col_s3 = st.columns(3)
@@ -121,8 +139,25 @@ def show_inicio():
         # --- PUNTOS DEL MES ---
         st.write("### ⭐ Mis Puntos")
         
-        puntos_mes = sum(v.get('puntos', 0) for fecha, ventas_dia in ventas_agente.items() if fecha.startswith(mes_actual) for v in ventas_dia)
+        # Puntos por ventas (NO cumplido)
+        puntos_ventas_no_cumple = sum(v.get('puntos', 0) for fecha, ventas_dia in ventas_agente.items() if fecha.startswith(mes_actual) for v in ventas_dia)
         
+        # Puntos por ventas (SI cumplido)
+        puntos_ventas_cumple = 0
+        for fecha, ventas_dia in ventas_agente.items():
+            if fecha.startswith(mes_actual):
+                for venta in ventas_dia:
+                    tipo = venta.get('tipo', 'CAPTA')
+                    producto = venta.get('producto', '')
+                    pts = PUNTOS_PRODUCTO.get(tipo, {}).get(producto, {}).get('cumple', 0)
+                    for s in venta.get('servicios', []):
+                        if s == "PI": pts += PUNTOS_PRODUCTO.get(tipo, {}).get("Pack Iberdrola (PI)", {}).get('cumple', 0)
+                        elif s == "UEN": pts += PUNTOS_PRODUCTO.get(tipo, {}).get("UEN", {}).get('cumple', 0)
+                        elif s == "PMG": pts += PUNTOS_PRODUCTO.get(tipo, {}).get("Pack Mantenimiento Gas (PMG)", {}).get('cumple', 0)
+                        elif s == "FE": pts += PUNTOS_PRODUCTO.get(tipo, {}).get("Facturación Electrónica (FE)", {}).get('cumple', 0)
+                    puntos_ventas_cumple += pts
+        
+        # Puntos extra (pago semanal)
         puntos_extra_mes = 0
         extras_agente = datos_puntos['puntos_extra'].get(username, {})
         for fecha, extras in extras_agente.items():
@@ -132,15 +167,30 @@ def show_inicio():
                 elif isinstance(extras, dict):
                     puntos_extra_mes += extras.get('puntos', 0)
         
-        pendientes = calcular_puntos_pendientes(username, datos_puntos)
+        # Mostrar puntos por ventas (pendientes de cierre mensual)
+        st.write("**💼 Puntos por Ventas**")
+        st.caption("Se pagan al cerrar el mes, segun cumplimiento")
+        col_v1, col_v2 = st.columns(2)
+        with col_v1:
+            st.metric("Obj NO Cumplido", f"{puntos_ventas_no_cumple} pts")
+            st.caption(f"💰 {puntos_ventas_no_cumple/22:.2f}€")
+        with col_v2:
+            st.metric("Obj Cumplido", f"{puntos_ventas_cumple} pts")
+            st.caption(f"💰 {puntos_ventas_cumple/22:.2f}€")
         
-        col_p1, col_p2, col_p3 = st.columns(3)
-        with col_p1:
-            st.metric("Puntos Ventas", puntos_mes)
-        with col_p2:
+        # Mostrar puntos extra (pago semanal)
+        st.write("**🎁 Puntos Extra**")
+        st.caption("Se pagan semanalmente")
+        col_e1, col_e2 = st.columns(2)
+        with col_e1:
             st.metric("Puntos Extra", puntos_extra_mes)
-        with col_p3:
-            st.metric("Pendientes Pago", pendientes)
+            st.caption(f"💰 {puntos_extra_mes/22:.2f}€")
+        with col_e2:
+            # Puntos ya pagados este mes
+            pagos = datos_puntos['pagos_realizados'].get(username, [])
+            pagado_mes = sum(p.get('puntos_pagados', 0) for p in pagos if p.get('fecha', '').startswith(mes_actual))
+            st.metric("PAGADOS", pagado_mes)
+            st.caption(f"💰 {pagado_mes/22:.2f}€")
     
     # =============================================
     # RANKING DE CAMPAÑA
@@ -156,36 +206,40 @@ def show_inicio():
     for a in todos_agentes:
         a_username = a['username']
         
+        # Ventas del mes desde REGISTRO DIARIO
         ventas = 0
-        ventas_a = datos_puntos['ventas'].get(a_username, {})
-        for fecha, ventas_dia in ventas_a.items():
-            if fecha.startswith(mes_actual):
-                for v in ventas_dia:
-                    if v.get('campaña', '') == campana_agente:
-                        ventas += 1
+        for fecha, agentes in registro.items():
+            if fecha.startswith(mes_actual) and a_username in agentes:
+                datos = agentes[a_username]
+                if datos.get('campaña', '') == campana_agente:
+                    ventas += datos.get('ventas', 0)
         
         horas_dia = a.get('schedule', {}).get('daily_hours', 6.0)
         sph_config_a = a.get('sph_config', {})
         sph_obj = sph_config_a.get('target', 0.06)
         
-        dias_lab = 0
-        dias_aus = 0
+        # Calcular horas REALES desde registro diario
+        horas_tot = 0
         dia_inicio_a = max(datetime.strptime(a.get('incorporation_date', hoy_dt.strftime('%Y-%m-%d')), '%Y-%m-%d').day if a.get('incorporation_date') else 1, 1)
         for d in range(dia_inicio_a, hoy_dt.day + 1):
             fecha_check = datetime(hoy_dt.year, hoy_dt.month, d)
             if fecha_check.weekday() < 5:
-                dias_lab += 1
                 fecha_str = fecha_check.strftime('%Y-%m-%d')
                 reg_dia = registro.get(fecha_str, {}).get(a_username, {})
-                if reg_dia.get('campaña', '') == campana_agente:
-                    if reg_dia.get('ausente', False):
-                        dias_aus += 1
-                else:
-                    dias_lab -= 1
+                if reg_dia.get('campaña', '') == campana_agente and not reg_dia.get('ausente', False):
+                    hora_salida = reg_dia.get('hora_salida', '')
+                    if hora_salida:
+                        try:
+                            h_ini = datetime.strptime(a.get('schedule', {}).get('start_time', '15:00'), '%H:%M')
+                            h_fin = datetime.strptime(hora_salida, '%H:%M')
+                            horas_tot += round((h_fin - h_ini).seconds / 3600, 2)
+                        except:
+                            horas_tot += horas_dia
+                    else:
+                        horas_tot += horas_dia
         
-        dias_efec = max(0, dias_lab - dias_aus)
-        horas_tot = horas_dia * dias_efec
         sph = round(ventas / (horas_tot * 0.83), 2) if ventas > 0 and horas_tot > 0 else 0.0
+        dias_efec = round(horas_tot / horas_dia, 1) if horas_dia > 0 else 0
         
         ranking.append({
             'Agente': a_username,
@@ -215,7 +269,7 @@ def show_inicio():
         elif posicion == 3:
             return ['background-color: #CD7F32; color: #000000; font-weight: bold'] * len(row)
         if row['Tu'] == '👈 TU':
-            return ['background-color: #fff3cd; font-weight: bold'] * len(row)
+            return ['background-color: #fff3cd; color: #000000; font-weight: bold'] * len(row)
         return ['font-weight: bold'] * len(row)
     
     df_styled = df_ranking[columnas].style.apply(colorear_ranking, axis=1)
@@ -225,7 +279,7 @@ def show_inicio():
     df_styled = df_styled.set_table_styles([
         {'selector': 'thead th',
          'props': [('background-color', '#2c3e50'), ('color', 'white'), ('font-weight', 'bold'),
-                   ('font-size', '14px'), ('text-align', 'center'), ('padding', '10px')]}
+                   ('font-size', '14px'), ('text-align', 'center'), ('padding', '10px')]},
     ])
     
     st.dataframe(df_styled, use_container_width=True, hide_index=True)

@@ -235,8 +235,23 @@ def show_inicio_admin():
                     else:
                         ausente_agente = True
         
-        dias_efectivos = max(0, dias_lab - (1 if ausente_agente else 0))
-        horas_efect = horas_diarias * dias_efectivos
+        # Calcular horas reales (con ausencias parciales)
+        horas_efect = 0
+        for fecha_str, datos_dia in registro.items():
+            if fecha_inicio <= fecha_str <= fecha_fin and username in datos_dia:
+                datos = datos_dia[username]
+                if not datos.get('ausente', False):
+                    hora_salida = datos.get('hora_salida', '')
+                    if hora_salida:
+                        try:
+                            h_ini = datetime.strptime(agente.get('schedule', {}).get('start_time', '15:00'), '%H:%M')
+                            h_fin = datetime.strptime(hora_salida, '%H:%M')
+                            horas_efect += round((h_fin - h_ini).seconds / 3600, 2)
+                        except:
+                            horas_efect += horas_diarias
+                    else:
+                        horas_efect += horas_diarias
+        
         sph_agente = round(ventas_agente / (horas_efect * 0.83), 2) if ventas_agente > 0 and horas_efect > 0 else 0.0
         
         data_agentes.append({

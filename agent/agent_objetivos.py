@@ -36,21 +36,30 @@ def show_objetivos():
         if fecha.startswith(mes_actual_str):
             ventas_mes += len(ventas_dia)
     
-    # Dias trabajados desde incorporacion
-    dias_laborables = 0
+    # Calcular horas reales (con ausencias parciales)
+    horas_totales = 0
     dias_ausente = 0
     dia_inicio = max(fecha_incorporacion.day, 1) if fecha_incorporacion.month == hoy.month else 1
     for d in range(dia_inicio, hoy.day + 1):
         fecha_check = datetime(hoy.year, hoy.month, d)
         if fecha_check.weekday() < 5:
-            dias_laborables += 1
             fecha_str = fecha_check.strftime('%Y-%m-%d')
             reg_dia = registro.get(fecha_str, {}).get(username, {})
             if reg_dia.get('ausente', False):
                 dias_ausente += 1
+            else:
+                hora_salida = reg_dia.get('hora_salida', '')
+                if hora_salida:
+                    try:
+                        h_ini = datetime.strptime(agente.get('schedule', {}).get('start_time', '15:00'), '%H:%M')
+                        h_fin = datetime.strptime(hora_salida, '%H:%M')
+                        horas_totales += round((h_fin - h_ini).seconds / 3600, 2)
+                    except:
+                        horas_totales += horas_diarias
+                else:
+                    horas_totales += horas_diarias
     
-    dias_efectivos = max(0, dias_laborables - dias_ausente)
-    horas_totales = horas_diarias * dias_efectivos
+    dias_efectivos = round(horas_totales / horas_diarias, 1) if horas_diarias > 0 else 0
     sph_real = round(ventas_mes / (horas_totales * 0.83), 2) if ventas_mes > 0 and horas_totales > 0 else 0.0
     
     # Objetivo mensual
@@ -67,7 +76,7 @@ def show_objetivos():
             ausencias_futuras += 1
     
     dias_restantes_efectivos = max(0, dias_restantes - ausencias_futuras)
-    objetivo_ventas_mes = round(horas_diarias * (dias_laborables + dias_restantes_efectivos) * sph_target * 0.83)
+    objetivo_ventas_mes = round(horas_diarias * (dias_efectivos + dias_restantes_efectivos) * sph_target * 0.83)
     
     # Mostrar metricas
     st.write("### 📈 Estado Actual del Mes")
@@ -84,7 +93,7 @@ def show_objetivos():
     st.write("### 📅 Dias del Mes")
     col_d1, col_d2, col_d3 = st.columns(3)
     with col_d1:
-        st.metric("Dias Trabajados", dias_efectivos)
+        st.metric("Dias Trabajados", f"{dias_efectivos:.1f}")
     with col_d2:
         st.metric("Dias Ausente", dias_ausente)
     with col_d3:
