@@ -102,7 +102,8 @@
     },
     "managed_agents": [
       "0330",
-      "W0330"
+      "W0330",
+      "0640"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -1877,6 +1878,47 @@
     },
     "incorporation_date": "2026-04-27",
     "created_at": "2026-04-27T18:58:35.718697",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0640",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "María Sedeño",
+    "id_empleado": "1236",
+    "campaign": "CAPTA",
+    "team": "Equipo Pablo",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:36:30.595052"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:36:30.595060",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
