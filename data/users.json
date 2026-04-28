@@ -112,7 +112,8 @@
       "0825",
       "0850",
       "0854",
-      "0888"
+      "0888",
+      "0893"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -2297,6 +2298,47 @@
     },
     "incorporation_date": "2026-04-28",
     "created_at": "2026-04-28T12:54:37.451735",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0893",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "José Gabriel Orellana",
+    "id_empleado": "1558",
+    "campaign": "CAPTA",
+    "team": "Equipo Pablo",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "16:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 5.0,
+      "weekly_hours": 25.0,
+      "type": "reduced"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T13:00:24.776261"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T13:00:24.776268",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
