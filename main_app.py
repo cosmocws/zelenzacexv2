@@ -121,6 +121,10 @@ def sidebar_navigation():
                 "🎯 Mis Objetivos",
                 "📅 Solicitar Ausencia"
             ])
+        elif role == 'datos':
+            # Sin navegación, solo dashboard
+            pages = ["🖥️ Dashboard"]
+            st.session_state.current_page = "🖥️ Dashboard"
         
         selected_page = st.radio("Navegacion", pages, label_visibility="collapsed")
         st.session_state.current_page = selected_page
@@ -187,6 +191,11 @@ def show_under_construction():
 # ===========================================
 def main():
     """Punto de entrada principal de la aplicacion."""
+
+    if st.session_state.get('user') and st.session_state.user.get('role') == 'datos':
+        st.markdown("""
+        <meta http-equiv="refresh" content="300">
+        """, unsafe_allow_html=True)
     
     if 'user_manager' not in st.session_state:
         st.session_state.user_manager, st.session_state.github_sync = init_services()
@@ -240,6 +249,9 @@ def main():
     elif current_page == "⚙️ Configuración":
         from admin.admin_configuracion import show_configuracion
         show_configuracion()
+    elif current_page == "🖥️ Dashboard":
+        from datos.datos_dashboard import show_dashboard
+        show_dashboard()
 
 # ===========================================
 # EJECUCION

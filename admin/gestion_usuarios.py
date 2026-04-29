@@ -36,7 +36,7 @@ def show_gestion_usuarios():
                     id_empleado = st.text_input("ID Empleado", placeholder="Ej: 1469")
                 
                 with col2:
-                    role = st.selectbox("Rol*", ["agent", "super", "admin"])
+                    role = st.selectbox("Rol*", ["agent", "super", "admin", "datos"])
                     team = st.text_input("Equipo", value="Sin equipo")
                     
                     if role == "agent":

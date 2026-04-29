@@ -6,7 +6,7 @@ from typing import Optional, List, Dict
 from datetime import datetime, timedelta
 
 class UserManager:
-    VALID_ROLES = ["agent", "super", "admin"]
+    VALID_ROLES = ["agent", "super", "admin", "datos"]
     VALID_CAMPAIGNS = ["CAPTA", "WINBACK"]
     
     def __init__(self, data_dir: str = "data"):

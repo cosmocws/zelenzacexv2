@@ -29,7 +29,7 @@
     "active_absence": null,
     "incorporation_date": "2026-04-25",
     "created_at": "2026-04-25T22:38:36.615859",
-    "last_login": "2026-04-29T08:22:51.010214"
+    "last_login": "2026-04-29T09:05:29.233788"
   },
   {
     "username": "0731",
@@ -2340,6 +2340,37 @@
     "incorporation_date": "2026-04-28",
     "created_at": "2026-04-28T13:00:24.776268",
     "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "DATOS",
+    "password_hash": "50d30c134163231447a25e994f252ade0d2b41028f1abd2251f04be802896551",
+    "role": "datos",
+    "nombre": "DATOS",
+    "id_empleado": "",
+    "campaign": null,
+    "team": "Sin equipo",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": null,
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T09:08:18.937543",
+    "last_login": "2026-04-29T09:13:40.142028",
     "standby": false,
     "usuario_padre": null
   }

@@ -60,6 +60,10 @@ USER_ROLES = {
     "admin": {
         "name": "Administrador",
         "permissions": ["manage_users", "manage_campaigns", "view_all", "system_config"]
+    },
+    "datos": {
+        "name": "Dashboard Sala",
+        "permissions": ["view_all", "view_rankings"]
     }
 }
 
