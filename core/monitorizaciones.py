@@ -37,12 +37,11 @@ def guardar_monitorizaciones(datos: Dict):
         json.dump(datos, f, indent=4, ensure_ascii=False)
 
 def obtener_ultima_monitorizacion(id_empleado: str) -> Optional[Dict]:
-    """Obtiene la última monitorización de un agente."""
     todas = cargar_monitorizaciones()
     monitorizaciones_agente = []
     
     for id_mon, mon in todas.items():
-        if mon.get('id_empleado') == id_empleado:
+        if mon.get('id_empleado') == id_empleado or mon.get('username') == id_empleado:
             monitorizaciones_agente.append(mon)
     
     if not monitorizaciones_agente:
@@ -56,7 +55,7 @@ def obtener_monitorizaciones_empleado(id_empleado: str) -> List[Dict]:
     todas = cargar_monitorizaciones()
     resultado = []
     for id_mon, mon in todas.items():
-        if mon.get('id_empleado') == id_empleado:
+        if mon.get('id_empleado') == id_empleado or mon.get('username') == id_empleado:
             resultado.append(mon)
     resultado.sort(key=lambda x: x.get('fecha_monitorizacion', ''), reverse=True)
     return resultado
@@ -98,6 +97,8 @@ def guardar_monitorizacion(datos: Dict, supervisor_id: str) -> str:
     
     todas[id_mon] = datos
     guardar_monitorizaciones(todas)
+    from core.github_sync import sync_archivo
+    sync_archivo("data/monitorizaciones.json")
     return id_mon
 
 # =============================================

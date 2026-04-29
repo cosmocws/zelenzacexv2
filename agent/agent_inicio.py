@@ -65,9 +65,15 @@ def show_inicio():
             
             puntos = ultima.get('puntos_clave', [])
             if puntos:
-                st.write("**🔑 Puntos Clave:**")
+                st.markdown("**🔑 Puntos Clave:**")
                 for p in puntos:
-                    st.write(f"- {p}")
+                    st.markdown(f"""
+                    <div style="background-color: #fff3cd; border: 2px solid #ffc107; 
+                                border-radius: 8px; padding: 12px; margin: 5px 0; 
+                                font-size: 20px; font-weight: bold; color: #856404; text-align: center;">
+                        ⚠️ {p}
+                    </div>
+                    """, unsafe_allow_html=True)
             
             if ultima.get('feedback'):
                 with st.expander("📝 Feedback"):

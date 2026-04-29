@@ -200,6 +200,15 @@ def main():
         return
     
     sidebar_navigation()
+
+    # Auto-rerun para el rol datos (dashboard de sala)
+    if st.session_state.user.get('role') == 'datos':
+        import time
+        if 'last_rerun' not in st.session_state:
+            st.session_state.last_rerun = time.time()
+        if time.time() - st.session_state.last_rerun > 60:
+            st.session_state.last_rerun = time.time()
+            st.rerun()
     
     current_page = st.session_state.get('current_page', "🏠 Inicio")
     

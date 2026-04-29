@@ -176,7 +176,8 @@ def show_inicio_super():
     
     sin_monitorizar = []
     for agente in mis_agentes:
-        monis = obtener_monitorizaciones_empleado(agente['username'])
+        id_empleado = agente.get('id_empleado', username)
+        monis = obtener_monitorizaciones_empleado(id_empleado)
         if monis:
             ultima = monis[0]
             fecha_ultima = ultima.get('fecha_monitorizacion', '')

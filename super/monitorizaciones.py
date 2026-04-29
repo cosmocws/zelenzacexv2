@@ -113,10 +113,10 @@ def show_monitorizaciones():
             st.write("#### 📅 Datos Basicos")
             col1, col2, col3 = st.columns(3)
             with col1:
-                # Si hay agente_username del PDF, usarlo
                 agente_username = d.get('agente_username', '')
                 if agente_username:
-                    st.text_input("Agente (auto-detectado)", value=agente_username, disabled=True)
+                    nombre_agente = next((a.get('nombre', agente_username) for a in mis_agentes if a['username'] == agente_username), agente_username)
+                    st.text_input("Agente (auto-detectado)", value=f"{agente_username} ({nombre_agente})", disabled=True)
                     agente_id = agente_username
                 else:
                     agente_id = st.selectbox(
@@ -202,7 +202,8 @@ def show_monitorizaciones():
                     st.error("❌ El agente es obligatorio")
                 else:
                     datos_guardar = {
-                        'id_empleado': str(d.get('id_empleado', agente_id)),
+                        'id_empleado': agente_id,  # Esto ya es el username
+                        'username': agente_id,      # Añadir campo username
                         'fecha_monitorizacion': fecha_mon.strftime('%Y-%m-%d'),
                         'fecha_proxima_monitorizacion': fecha_prox.strftime('%Y-%m-%d'),
                         'nota_global': nota_global,
