@@ -192,11 +192,6 @@ def show_under_construction():
 def main():
     """Punto de entrada principal de la aplicacion."""
 
-    if st.session_state.get('user') and st.session_state.user.get('role') == 'datos':
-        st.markdown("""
-        <meta http-equiv="refresh" content="300">
-        """, unsafe_allow_html=True)
-    
     if 'user_manager' not in st.session_state:
         st.session_state.user_manager, st.session_state.github_sync = init_services()
     
