@@ -116,7 +116,8 @@
       "0893",
       "0913",
       "0969",
-      "0978"
+      "0978",
+      "0979"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -2496,6 +2497,47 @@
     },
     "incorporation_date": "2026-04-29",
     "created_at": "2026-04-29T12:22:01.116758",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0979",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Domingo Valderrama",
+    "id_empleado": "1679",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-29T12:22:26.584144"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T12:22:26.584155",
     "last_login": null,
     "standby": false,
     "usuario_padre": null
