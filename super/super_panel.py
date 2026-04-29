@@ -28,11 +28,11 @@ PUNTOS_PRODUCTO = {
         "Facturación Electrónica (FE)": {"no_cumple": 1, "cumple": 1},
     },
     "WINBACK": {
-        "Electricidad": {"no_cumple": 60, "cumple": 100},
-        "Gas": {"no_cumple": 20, "cumple": 40},
-        "Pack Iberdrola (PI)": {"no_cumple": 30, "cumple": 50},
-        "UEN": {"no_cumple": 30, "cumple": 50},
-        "Pack Mantenimiento Gas (PMG)": {"no_cumple": 10, "cumple": 20},
+        "Electricidad": {"no_cumple": 27, "cumple": 42},
+        "Gas": {"no_cumple": 32, "cumple": 50},
+        "Pack Iberdrola (PI)": {"no_cumple": 13, "cumple": 21},
+        "UEN": {"no_cumple": 13, "cumple": 21},
+        "Pack Mantenimiento Gas (PMG)": {"no_cumple": 16, "cumple": 25},
         "Facturación Electrónica (FE)": {"no_cumple": 1, "cumple": 1},
     }
 }
