@@ -113,7 +113,8 @@
       "0850",
       "0854",
       "0888",
-      "0893"
+      "0893",
+      "0913"
     ],
     "sph_config": null,
     "incorporation_date": "2026-04-27",
@@ -2371,6 +2372,47 @@
     "incorporation_date": "2026-04-29",
     "created_at": "2026-04-29T09:08:18.937543",
     "last_login": "2026-04-29T11:55:33.990391",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0913",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Elisabeth Martínez",
+    "id_empleado": "1599",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T12:21:08.833247"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T12:21:08.833253",
+    "last_login": null,
     "standby": false,
     "usuario_padre": null
   }
