@@ -23,6 +23,19 @@
                     "campaña": "CAPTA",
                     "supervisor": "0731"
                 }
+            ],
+            "2026-04-30": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CROSS",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 91,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
             ]
         },
         "0492": {
