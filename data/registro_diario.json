@@ -262,5 +262,15 @@
             "campaña": "CAPTA",
             "supervisor": "0731"
         }
+    },
+    "2026-04-30": {
+        "0828": {
+            "ventas": 1,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        }
     }
 }
