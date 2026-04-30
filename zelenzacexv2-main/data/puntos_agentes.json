@@ -1,0 +1,321 @@
+{
+    "ventas": {
+        "0828": {
+            "2026-04-27": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                },
+                {
+                    "producto": "Gas",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "FE"
+                    ],
+                    "puntos": 41,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ],
+            "2026-04-30": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CROSS",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 91,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        },
+        "0492": {
+            "2026-04-27": [
+                {
+                    "producto": "Gas",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PMG",
+                        "FE"
+                    ],
+                    "puntos": 61,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        },
+        "0733": {
+            "2026-04-27": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "FE"
+                    ],
+                    "puntos": 101,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                },
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        },
+        "0883": {
+            "2026-04-27": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        },
+        "1002": {
+            "2026-04-27": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0012"
+                }
+            ]
+        },
+        "0928": {
+            "2026-04-27": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0012"
+                }
+            ]
+        },
+        "0629": {
+            "2026-04-27": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0012"
+                }
+            ]
+        },
+        "0657": {
+            "2026-04-27": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ],
+            "2026-04-30": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        },
+        "0916": {
+            "2026-04-29": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "FE"
+                    ],
+                    "puntos": 101,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                },
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "FE"
+                    ],
+                    "puntos": 101,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        },
+        "0694": {
+            "2026-04-30": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0215"
+                },
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0215"
+                }
+            ]
+        },
+        "0613": {
+            "2026-04-30": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CROSS",
+                    "servicios": [
+                        "FE"
+                    ],
+                    "puntos": 61,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                },
+                {
+                    "producto": "Gas",
+                    "tipo": "CROSS",
+                    "servicios": [
+                        "FE"
+                    ],
+                    "puntos": 21,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        },
+        "1028": {
+            "2026-04-30": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0215"
+                }
+            ]
+        },
+        "0929": {
+            "2026-04-30": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0215"
+                }
+            ]
+        },
+        "0821": {
+            "2026-04-30": [
+                {
+                    "producto": "Electricidad",
+                    "tipo": "CAPTA",
+                    "servicios": [
+                        "PI",
+                        "FE"
+                    ],
+                    "puntos": 151,
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        }
+    },
+    "objetivos_cumplidos": {},
+    "puntos_extra": {
+        "0828": {
+            "2026-04-27": [
+                {
+                    "puntos": 400,
+                    "motivo": "Semana anterior <=5 VENTAS",
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ],
+            "2026-04-30": [
+                {
+                    "puntos": 400,
+                    "motivo": "5/+ VENTAS SEMANA ANTERIOR",
+                    "campaña": "CAPTA",
+                    "supervisor": "0731"
+                }
+            ]
+        },
+        "0928": {
+            "2026-04-27": [
+                {
+                    "puntos": 200,
+                    "motivo": "<= 5 VENTAS SEMANA ANTERIOR",
+                    "campaña": "CAPTA",
+                    "supervisor": "0012"
+                }
+            ]
+        }
+    },
+    "pagos_realizados": {}
+}

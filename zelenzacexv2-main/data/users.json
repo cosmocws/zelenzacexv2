@@ -1,0 +1,3076 @@
+[
+  {
+    "username": "admin",
+    "password_hash": "07c8ccf407ae74d8818905d1f01e27d0cfa833cc6a34dc058550de57df8d26d6",
+    "role": "admin",
+    "nombre": "Administrador",
+    "id_empleado": "",
+    "email": "luis.ortegamoreno@zelenza.com",
+    "campaign": null,
+    "team": "Administracion",
+    "manager": null,
+    "schedule": {
+      "start_time": "14:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 7.0,
+      "weekly_hours": 35.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": null,
+    "campaign_history": null,
+    "active_absence": null,
+    "incorporation_date": "2026-04-25",
+    "created_at": "2026-04-25T22:38:36.615859",
+    "last_login": "2026-04-29T22:44:03.955872"
+  },
+  {
+    "username": "0731",
+    "password_hash": "f37f559d25de4aa17b6dedd021baa32094685e69664871b1e6f029dc058907dc",
+    "role": "super",
+    "nombre": "Luis Ortega",
+    "id_empleado": "",
+    "campaign": null,
+    "team": "Sin equipo",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [
+      "0202",
+      "0381",
+      "0828",
+      "0492",
+      "0613",
+      "0657",
+      "0733",
+      "0775",
+      "0782",
+      "0821",
+      "0883",
+      "0916",
+      "1011",
+      "1012"
+    ],
+    "sph_config": null,
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T11:50:34.217426",
+    "last_login": "2026-04-30T21:25:39.742510",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0215",
+    "password_hash": "95b87c321d721759576164b96706734278fa39498db944e27bd52a9d4b55487e",
+    "role": "super",
+    "nombre": "Pablo Cámara",
+    "id_empleado": "",
+    "campaign": null,
+    "team": "Sin equipo",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [
+      "0640",
+      "0650",
+      "0675",
+      "0808",
+      "0823",
+      "0824",
+      "0825",
+      "0850",
+      "0854",
+      "0888",
+      "0893",
+      "0913",
+      "0969",
+      "0978",
+      "0979",
+      "0694"
+    ],
+    "sph_config": null,
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T11:51:19.361054",
+    "last_login": "2026-04-30T18:52:26.798765",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0202",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Sara Garrido",
+    "id_empleado": "316",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T12:05:28.148996"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T12:05:28.149002",
+    "last_login": "2026-04-27T12:08:48.468869",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0381",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Luis Martín",
+    "id_empleado": "793",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-27T12:06:08.956915"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T12:06:08.956926",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0828",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Marisol Sotomayor",
+    "id_empleado": "1517",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "10:00",
+      "end_time": "16:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-27T12:11:56.855390"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T12:11:56.855399",
+    "last_login": "2026-04-30T12:13:34.381655",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0492",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Aya Gartit",
+    "id_empleado": "958",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-27T13:49:37.314340"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:49:37.314349",
+    "last_login": "2026-04-28T15:14:00.518876",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0613",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Nuria Roldán",
+    "id_empleado": "1206",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-27T13:51:11.428752"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:51:11.428765",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0657",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Rocío Moslero",
+    "id_empleado": "1290",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T13:52:06.330321"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:52:06.330331",
+    "last_login": "2026-04-30T19:11:33.817538",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0733",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Álvaro Morales",
+    "id_empleado": "1389",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T13:53:16.268879"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:53:16.268892",
+    "last_login": "2026-04-30T14:52:58.933652",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0775",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Carmen López",
+    "id_empleado": "1316",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.17,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.17,
+          "set_at": "2026-04-27T13:54:27.012574"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:54:27.012584",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0782",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Rocío Miranda",
+    "id_empleado": "1410",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T13:55:34.079724"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:55:34.079733",
+    "last_login": "2026-04-30T13:20:42.842487",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0821",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Irene Benítez",
+    "id_empleado": "1496",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T13:56:21.240700"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:56:21.240710",
+    "last_login": "2026-04-30T13:34:58.054474",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0883",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Javier Mateo",
+    "id_empleado": "1555",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T13:56:50.963036"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:56:50.963047",
+    "last_login": "2026-04-28T08:57:49.394312",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0916",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Iván Arras",
+    "id_empleado": "1595",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T13:57:19.478205"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:57:19.478216",
+    "last_login": "2026-04-30T19:06:33.871421",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1011",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Alex García",
+    "id_empleado": "1725",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T13:57:57.291095"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:57:57.291105",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1012",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Eduardo Carmona",
+    "id_empleado": "1716",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T13:58:25.585948"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T13:58:25.585955",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0235",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Fernando Sarmiento",
+    "id_empleado": "363",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.1,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.1,
+          "set_at": "2026-04-27T16:39:03.474993"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:39:03.474999",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0387",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "David Montesinos",
+    "id_empleado": "1421",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:40:21.175626"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:40:21.175640",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0629",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Ainara Martín",
+    "id_empleado": "753",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "16:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 5.0,
+      "weekly_hours": 25.0,
+      "type": "reduced"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:41:13.640686"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:41:13.640695",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0753",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Estefanía Merino",
+    "id_empleado": "1450",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "10:00",
+      "end_time": "16:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:42:27.338643"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:42:27.338653",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0791",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "José Manuel Serrano",
+    "id_empleado": "1469",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:44:13.065247"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:44:13.065254",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0792",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Carmen Uceda",
+    "id_empleado": "1470",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:46:22.487857"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:46:22.487868",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0811",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Alexandra Caravantes",
+    "id_empleado": "1491",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:47:11.880630"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:47:11.880641",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0928",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Jesica López",
+    "id_empleado": "1606",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:48:05.760821"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:48:05.760828",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0929",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Lucas Mateo",
+    "id_empleado": "1605",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:50:32.450801"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:50:32.450808",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0934",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "África Martín",
+    "id_empleado": "1608",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:51:39.399351"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:51:39.399364",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0955",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Bartlomiej Krzystof",
+    "id_empleado": "1636",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "16:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 5.0,
+      "weekly_hours": 25.0,
+      "type": "reduced"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:53:11.753345"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:53:11.753354",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0966",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Alejandro Yépez",
+    "id_empleado": "1664",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-27T16:53:55.385968"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:53:55.385981",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0998",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Antonio Rodríguez",
+    "id_empleado": "1718",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T16:54:48.903088"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:54:48.903114",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1002",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Sheila Larrisa Maidana",
+    "id_empleado": "1721",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T16:59:27.399105"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:59:27.399113",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1003",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Marta Ruíz",
+    "id_empleado": "1715",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T16:59:58.820407"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T16:59:58.820417",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1007",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Alberto Sánchez",
+    "id_empleado": "1717",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T17:00:28.695458"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T17:00:28.695466",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1010",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Youssra Labib",
+    "id_empleado": "1723",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T17:01:01.081059"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T17:01:01.081070",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1013",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Alba María Fortes",
+    "id_empleado": "1734",
+    "campaign": "CAPTA",
+    "team": "Equipo NÓVEL",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T18:44:29.794508"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T18:44:29.794515",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1016",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Juliana Arango",
+    "id_empleado": "1731",
+    "campaign": "CAPTA",
+    "team": "Equipo NÓVEL",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T18:45:45.019356"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T18:45:45.019364",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1017",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Emily Gaytán",
+    "id_empleado": "1732",
+    "campaign": "CAPTA",
+    "team": "Equipo NÓVEL",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T18:49:58.823659"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T18:49:58.823666",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1018",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Francisco Sola",
+    "id_empleado": "1733",
+    "campaign": "CAPTA",
+    "team": "Equipo NÓVEL",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T18:51:14.753832"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T18:51:14.753838",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1020",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Joan Manuel Palacios",
+    "id_empleado": "1736",
+    "campaign": "CAPTA",
+    "team": "Equipo NÓVEL",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T18:55:27.008494"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T18:55:27.008502",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1024",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Laura Dib",
+    "id_empleado": "1742",
+    "campaign": "CAPTA",
+    "team": "Equipo NÓVEL",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T18:56:21.359411"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T18:56:21.359417",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1027",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "África López",
+    "id_empleado": "1737",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA A",
+    "manager": "0731",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T18:57:48.322538"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T18:57:48.322545",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "1028",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Sergio Costa",
+    "id_empleado": "1743",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-27",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-27T18:58:35.718690"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-27",
+    "created_at": "2026-04-27T18:58:35.718697",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0640",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "María Sedeño",
+    "id_empleado": "1236",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:36:30.595052"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:36:30.595060",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0650",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Samuel Gutierrez",
+    "id_empleado": "1275",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:37:31.118829"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:37:31.118838",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0675",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Jorge Carmona",
+    "id_empleado": "1321",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:38:48.991535"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:38:48.991545",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0808",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Luis María Muñiz",
+    "id_empleado": "1492",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:40:39.399810"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:40:39.399819",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0823",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Jose Antonio Nuñez",
+    "id_empleado": "1512",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "10:00",
+      "end_time": "17:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 7.0,
+      "weekly_hours": 35.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:42:02.913360"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:42:02.913370",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0824",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Paula González",
+    "id_empleado": "1513",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "10:00",
+      "end_time": "16:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:42:53.966658"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:42:53.966666",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0825",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Evelyn Pamela Cheel",
+    "id_empleado": "1514",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "10:00",
+      "end_time": "16:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:43:35.468724"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:43:35.468734",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0850",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Andrea Tortolero",
+    "id_empleado": "1536",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:44:39.354218"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:44:39.354231",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0854",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Yusely Bracho",
+    "id_empleado": "1545",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:45:14.367944"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:45:14.367952",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0888",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Alexandra Fernández",
+    "id_empleado": "1562",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T12:54:37.451726"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T12:54:37.451735",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0893",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "José Gabriel Orellana",
+    "id_empleado": "1558",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "16:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 5.0,
+      "weekly_hours": 25.0,
+      "type": "reduced"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-28",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-28T13:00:24.776261"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-28",
+    "created_at": "2026-04-28T13:00:24.776268",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "DATOS",
+    "password_hash": "50d30c134163231447a25e994f252ade0d2b41028f1abd2251f04be802896551",
+    "role": "datos",
+    "nombre": "DATOS",
+    "id_empleado": "",
+    "campaign": null,
+    "team": "Sin equipo",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": null,
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T09:08:18.937543",
+    "last_login": "2026-04-30T18:38:09.900921",
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0913",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Elisabeth Martínez",
+    "id_empleado": "1599",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T12:21:08.833247"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T12:21:08.833253",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0969",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "María Robles",
+    "id_empleado": "1672",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T12:21:32.186130"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T12:21:32.186140",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0978",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Marcos Díaz",
+    "id_empleado": "1678",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-29T12:22:01.116749"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T12:22:01.116758",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0979",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Domingo Valderrama",
+    "id_empleado": "1679",
+    "campaign": "CAPTA",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.5,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.5,
+          "set_at": "2026-04-29T12:22:26.584144"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T12:22:26.584155",
+    "last_login": null,
+    "standby": true,
+    "usuario_padre": null
+  },
+  {
+    "username": "0694",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Vanessa Ceballos",
+    "id_empleado": "1345",
+    "campaign": "CAPTA",
+    "team": "Equipo CAPTA B",
+    "manager": "0215",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.11,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.11,
+          "set_at": "2026-04-29T12:25:40.385702"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T12:25:40.385712",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "0330",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "super",
+    "nombre": "Marina García",
+    "id_empleado": "707",
+    "campaign": null,
+    "team": "Sin equipo",
+    "manager": null,
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [
+      "W0640",
+      "W0650",
+      "W0675",
+      "W0808",
+      "W0823",
+      "W0824",
+      "W0825",
+      "W0850",
+      "W0854",
+      "W0888",
+      "W0893",
+      "W0913",
+      "W0969",
+      "W0978",
+      "W0979"
+    ],
+    "sph_config": null,
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:47:15.267604",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": null
+  },
+  {
+    "username": "W0640",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "María Sedeño",
+    "id_empleado": "1236",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:54:57.373279"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:54:57.373287",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0640"
+  },
+  {
+    "username": "W0650",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Samuel Gutierrez",
+    "id_empleado": "1275",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:04.466503"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:04.466508",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0650"
+  },
+  {
+    "username": "W0675",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Jorge Carmona",
+    "id_empleado": "1321",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:08.116556"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:08.116564",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0675"
+  },
+  {
+    "username": "W0808",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Luis María Muñiz",
+    "id_empleado": "1492",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:11.770331"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:11.770339",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0808"
+  },
+  {
+    "username": "W0823",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Jose Antonio Nuñez",
+    "id_empleado": "1512",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "10:00",
+      "end_time": "17:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 7.0,
+      "weekly_hours": 35.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:16.144504"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:16.144513",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0823"
+  },
+  {
+    "username": "W0824",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Paula González",
+    "id_empleado": "1513",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "10:00",
+      "end_time": "16:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:19.600785"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:19.600792",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0824"
+  },
+  {
+    "username": "W0825",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Evelyn Pamela Cheel",
+    "id_empleado": "1514",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "10:00",
+      "end_time": "16:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:22.975190"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:22.975198",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0825"
+  },
+  {
+    "username": "W0850",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Andrea Tortolero",
+    "id_empleado": "1536",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:26.461640"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:26.461644",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0850"
+  },
+  {
+    "username": "W0854",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Yusely Bracho",
+    "id_empleado": "1545",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:29.882167"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:29.882174",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0854"
+  },
+  {
+    "username": "W0888",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Alexandra Fernández",
+    "id_empleado": "1562",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:33.224780"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:33.224788",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0888"
+  },
+  {
+    "username": "W0893",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "José Gabriel Orellana",
+    "id_empleado": "1558",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "16:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 5.0,
+      "weekly_hours": 25.0,
+      "type": "reduced"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:36.446926"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:36.446934",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0893"
+  },
+  {
+    "username": "W0913",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Elisabeth Martínez",
+    "id_empleado": "1599",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:40.066322"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:40.066330",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0913"
+  },
+  {
+    "username": "W0969",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "María Robles",
+    "id_empleado": "1672",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:43.881992"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:43.882000",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0969"
+  },
+  {
+    "username": "W0978",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Marcos Díaz",
+    "id_empleado": "1678",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:47.955053"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:47.955061",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0978"
+  },
+  {
+    "username": "W0979",
+    "password_hash": "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0",
+    "role": "agent",
+    "nombre": "Domingo Valderrama",
+    "id_empleado": "1679",
+    "campaign": "WINBACK",
+    "team": "Equipo WINBACK",
+    "manager": "0330",
+    "schedule": {
+      "start_time": "15:00",
+      "end_time": "21:00",
+      "working_days": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "daily_hours": 6.0,
+      "weekly_hours": 30.0,
+      "type": "full_time"
+    },
+    "managed_agents": [],
+    "sph_config": {
+      "target": 0.06,
+      "enabled": true,
+      "start_date": "2026-04-29",
+      "history": [
+        {
+          "target": 0.06,
+          "set_at": "2026-04-29T22:55:52.179611"
+        }
+      ]
+    },
+    "incorporation_date": "2026-04-29",
+    "created_at": "2026-04-29T22:55:52.179618",
+    "last_login": null,
+    "standby": false,
+    "usuario_padre": "0979"
+  }
+]

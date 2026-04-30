@@ -1,0 +1,35 @@
+{
+    "puntos_supervisor": {
+        "CAPTA": {
+            "electricidad": 20,
+            "electricidad_servicio": 20,
+            "gas": 15,
+            "gas_servicio": 15,
+            "bonus_electricidad": 15,
+            "bonus_electricidad_servicio": 15,
+            "bonus_gas": 10,
+            "bonus_gas_servicio": 10
+        },
+        "WINBACK": {
+            "electricidad": 5,
+            "electricidad_servicio": 5,
+            "gas": 4,
+            "gas_servicio": 4,
+            "bonus_electricidad": 3.5,
+            "bonus_electricidad_servicio": 3.5,
+            "bonus_gas": 2.5,
+            "bonus_gas_servicio": 2.5
+        }
+    },
+    "objetivos_ventas": {
+        "CAPTA": 245,
+        "WINBACK": 1000
+    },
+    "bonus_diarios": {
+        "2026-04-24": {
+            "0731": {
+                "CAPTA": false
+            }
+        }
+    }
+}
