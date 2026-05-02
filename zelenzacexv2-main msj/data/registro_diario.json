@@ -1,0 +1,436 @@
+{
+    "2026-05-01": {
+        "0202": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0381": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0828": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0492": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0613": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0657": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0733": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0775": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0782": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0821": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0883": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0916": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "1011": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "1012": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "1027": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0731"
+        },
+        "0640": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": false,
+            "campaña": "CAPTA",
+            "supervisor": "0330"
+        },
+        "W0640": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0650": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0675": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0808": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0823": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0824": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0825": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0850": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0854": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0888": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0893": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0913": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0969": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0978": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "W0979": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "WINBACK",
+            "supervisor": "0330"
+        },
+        "0235": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0387": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0629": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0753": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0791": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0792": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0811": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0928": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0929": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0934": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0955": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0966": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0998": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "1002": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "1003": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "1007": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "1010": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "1017": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": null
+        },
+        "1018": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": null
+        },
+        "1020": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": null
+        },
+        "1024": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": null
+        },
+        "1028": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        },
+        "0694": {
+            "ventas": 0,
+            "llamadas_5m": 0,
+            "llamadas_15m": 0,
+            "ausente": true,
+            "campaña": "CAPTA",
+            "supervisor": "0215"
+        }
+    }
+}
